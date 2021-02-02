@@ -43,7 +43,7 @@ public class SwaggerConfig {
         return SecurityContext
                 .builder()
                 .securityReferences(Arrays.asList(basicAuthReference(), bearerAuthReference()))
-                .forPaths(PathSelectors.ant("/module_name/**")).build();
+                .forPaths(PathSelectors.ant("/**")).build();
     }
 
     private SecurityReference basicAuthReference() {
