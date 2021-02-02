@@ -1,0 +1,640 @@
+[
+  {
+    "categories": [
+      {
+        "title": "MainCourse"
+      },
+      {
+        "title": "vegan"
+      },
+      {
+        "title": "light"
+      }
+    ],
+    "description": "the best pizza in town.. ",
+    "eTrackingId": 0,
+    "image": {
+      "eImageId": 2,
+      "isDefault": true,
+      "url": "https://kookidee.nl/wp-content/uploads/2018/11/pizza-margherita-05.jpg"
+    },
+    "ingredients": [
+      {
+        "ingredientName": "Tomatoes",
+        "price": 0.0
+      },
+      {
+        "ingredientName": "Fresh Basil",
+        "price": 0.0
+      },
+      {
+        "ingredientName": "Mozzarella",
+        "price": 0.0
+      }
+    ],
+    "isFeatured": true,
+    "lastUpdatedBy": {
+      "externalUserId": 1,
+      "username": "+32467711709"
+    },
+    "limitPerOrder": 100,
+    "prices": [
+      {
+        "amount": 12.0,
+        "currency": "EUR",
+        "expiryDate": "2022-01-16",
+        "expiryTime": "21:30",
+        "isDefault": true,
+        "title": "default price"
+      }
+    ],
+    "productName": "Pizza Margarita",
+    "store": {
+      "externalStoreId": 1,
+      "storeName": "Pizza Heat"
+    },
+    "tags": [
+      {
+        "value": "Cheap and Best"
+      },
+      {
+        "value": "Quick"
+      }
+    ],
+    "taxes": [
+      {
+        "isDefault": true,
+        "percentage": 0.21,
+        "title": "Standard Tax"
+      },
+      {
+        "isDefault": true,
+        "percentage": 0.0,
+        "title": "No Tax"
+      },
+      {
+        "isDefault": true,
+        "percentage": 0.21,
+        "title": "Export Tax"
+      },
+      {
+        "isDefault": true,
+        "percentage": 0.21,
+        "title": "Student Tax"
+      }
+    ],
+    "type": "SIMPLE"
+  },
+  {
+    "categories": [
+      {
+        "title": "Main"
+      }
+    ],
+    "user": {
+      "externalUserId": 1,
+      "username": "+32467711709",
+      "type": "CREATED"
+    },
+    "description": "The Best Nigiri Maguro Sushi in town.. ",
+    "externalProductId": 0,
+    "images": [
+      {
+        "externalMediaId": 2,
+        "isDefault": true,
+        "url": "https://cdn.tasteatlas.com/images/dishes/7ff89cab5d8a436c8612e86980fea3ff.jpg?w=600&h=450"
+      }
+    ],
+    "ingredients": [
+      {
+        "ingredientName": "sushi rice",
+        "price": 0.0
+      },
+      {
+        "ingredientName": "Red Tuna",
+        "price": 0.0
+      },
+      {
+        "ingredientName": "Soy Sauce",
+        "price": 0.0
+      },
+      {
+        "ingredientName": "Wasabi",
+        "price": 1.00
+      }
+    ],
+    "isFeatured": true,
+    "lastUpdatedBy": {
+      "externalUserId": 1,
+      "username": "+32467711709"
+    },
+    "limitPerOrder": 50,
+    "prices": [
+      {
+        "amount": 6.0,
+        "currency": "EUR",
+        "expiryDate": "2022-01-16",
+        "expiryTime": "21:30",
+        "isDefault": true,
+        "title": "default price"
+      }
+    ],
+    "productName": "Nigiri Maguro",
+    "store": {
+      "externalStoreId": 2,
+      "storeName": "Nori Sushi"
+    },
+    "tags": [
+      {
+        "value": "classic"
+      },
+      {
+        "value": "sushiLover"
+      }
+    ],
+    "taxes": [
+      {
+        "isDefault": true,
+        "percentage": 0.21,
+        "title": "standard tax"
+      }
+    ],
+    "type": "COMPLEX"
+  },
+  {
+    "categories": [
+      {
+        "title": "sushi"
+      },
+      {
+        "title": "light"
+      }
+    ],
+    "user": {
+      "externalUserId": 1,
+      "username": "+32467711709",
+      "type": "CREATED"
+    },
+    "description": "the best Sea food in town.. ",
+    "externalProductId": 0,
+    "images": [
+      {
+        "externalMediaId": 2,
+        "isDefault": true,
+        "url": "https://img.static-rmg.be/a/food/image/q75/w640/h400/1067820/scampi-in-de-wok-met-teriyakisaus.jpg"
+      }
+    ],
+    "ingredients": [
+      {
+        "ingredientName": "shrimp",
+        "price": 0.0
+      },
+      {
+        "ingredientName": "green onions",
+        "price": 0.0
+      },
+      {
+        "ingredientName": "butter",
+        "price": 0.0
+      },
+      {
+        "ingredientName": "vegetable oil",
+        "price": 0.0
+      },
+      {
+        "ingredientName": "garlic",
+        "price": 0.0
+      },
+      {
+        "ingredientName": "lemon",
+        "price": 0.0
+      }
+    ],
+    "isFeatured": true,
+    "lastUpdatedBy": {
+      "externalUserId": 1,
+      "username": "+32467711709"
+    },
+    "limitPerOrder": 100,
+    "prices": [
+      {
+        "amount": 23.00,
+        "currency": "EUR",
+        "expiryDate": "2022-01-16",
+        "expiryTime": "21:30",
+        "isDefault": true,
+        "title": "default price"
+      }
+    ],
+    "productName": "Scampi Teriyaki",
+    "store": {
+      "externalStoreId": 2,
+      "storeName": "Nori Sushi"
+    },
+    "tags": [
+      {
+        "value": "Delicious"
+      },
+      {
+        "value": "Best"
+      },
+      {
+        "value": "Quick"
+      }
+    ],
+    "taxes": [
+      {
+        "isDefault": true,
+        "percentage": 0.21,
+        "title": "standard tax"
+      }
+    ],
+    "type": "SIMPLE"
+  },
+  {
+    "categories": [
+      {
+        "title": "Main Course"
+      },
+      {
+        "title": "Non Vegan"
+      }
+    ],
+    "user": {
+      "externalUserId": 1,
+      "username": "+32467711709",
+      "type": "CREATED"
+    },
+    "description": "the best PadThai Kip in town.. ",
+    "externalProductId": 0,
+    "images": [
+      {
+        "externalMediaId": 2,
+        "isDefault": true,
+        "url": "https://www.keukenliefde.nl/wp-content/uploads/2019/02/Pad-thai-met-kip-1343-1024x684.jpg"
+      }
+    ],
+    "ingredients": [
+      {
+        "ingredientName": "Chicken Fillets",
+        "price": 0.0
+      },
+      {
+        "ingredientName": "Noodles",
+        "price": 0.0
+      },
+      {
+        "ingredientName": "Chili Pepper",
+        "price": 0.0
+      },
+      {
+        "ingredientName": "Tofu",
+        "price": 0.0
+      },
+      {
+        "ingredientName": "Peanut oil",
+        "price": 0.0
+      },
+      {
+        "ingredientName": "Red Onion",
+        "price": 0.0
+      },
+      {
+        "ingredientName": "garlic",
+        "price": 0.0
+      }
+    ],
+    "isFeatured": true,
+    "lastUpdatedBy": {
+      "externalUserId": 1,
+      "username": "+32467711709"
+    },
+    "limitPerOrder": 100,
+    "prices": [
+      {
+        "amount": 11.50,
+        "currency": "EUR",
+        "expiryDate": "2022-01-16",
+        "expiryTime": "21:30",
+        "isDefault": true,
+        "title": "default price"
+      }
+    ],
+    "productName": "PadThai Kip",
+    "store": {
+      "externalStoreId": 2,
+      "storeName": "Nori Sushi"
+    },
+    "tags": [
+      {
+        "value": "quick"
+      },
+      {
+        "value": "best"
+      }
+    ],
+    "taxes": [
+      {
+        "isDefault": true,
+        "percentage": 0.21,
+        "title": "standard tax"
+      }
+    ],
+    "type": "SIMPLE"
+  },
+  {
+    "categories": [
+      {
+        "title": "sushi"
+      },
+      {
+        "title": "japanese dish"
+      }
+    ],
+    "user": {
+      "externalUserId": 1,
+      "username": "+32467711709",
+      "type": "CREATED"
+    },
+    "description": "the best Nigri Ebi in town.. ",
+    "externalProductId": 0,
+    "images": [
+      {
+        "externalMediaId": 2,
+        "isDefault": true,
+        "url": "https://images.fineartamerica.com/images/artworkimages/mediumlarge/1/ebi-nigiri-sushi-ilan-amihai.jpg"
+      }
+    ],
+    "ingredients": [
+      {
+        "ingredientName": "raw fish",
+        "price": 0.0
+      },
+      {
+        "ingredientName": "vinegared rice",
+        "price": 0.0
+      }
+    ],
+    "isFeatured": true,
+    "lastUpdatedBy": {
+      "externalUserId": 1,
+      "username": "+32467711709"
+    },
+    "limitPerOrder": 30,
+    "prices": [
+      {
+        "amount": 4.50,
+        "currency": "EUR",
+        "expiryDate": "2022-01-16",
+        "expiryTime": "21:30",
+        "isDefault": true,
+        "title": "default price"
+      }
+    ],
+    "productName": "Nigri Ebi",
+    "store": {
+      "externalStoreId": 2,
+      "storeName": "Nori Sushi"
+    },
+    "tags": [
+      {
+        "value": "delicious"
+      },
+      {
+        "value": "best sushi"
+      }
+    ],
+    "taxes": [
+      {
+        "isDefault": true,
+        "percentage": 0.21,
+        "title": "standard tax"
+      }
+    ],
+    "type": "SIMPLE"
+  },
+  {
+    "categories": [
+      {
+        "title": "pizza"
+      },
+      {
+        "title": "main"
+      }
+    ],
+    "user": {
+      "externalUserId": 1,
+      "username": "+32467711709",
+      "type": "CREATED"
+    },
+    "description": "the best pizza chicken in town.. ",
+    "externalProductId": 0,
+    "images": [
+      {
+        "externalMediaId": 2,
+        "isDefault": true,
+        "url": "https://cdn.sallysbakingaddiction.com/wp-content/uploads/2014/03/BBQ-Chicken-Pizza-Recipe-2.jpg"
+      }
+    ],
+    "ingredients": [
+      {
+        "ingredientName": "chicken",
+        "price": 0.0
+      },
+      {
+        "ingredientName": "onion",
+        "price": 0.0
+      },
+      {
+        "ingredientName": "Bell pepper",
+        "price": 0.0
+      },
+      {
+        "ingredientName": "mozzarella",
+        "price": 0.0
+      }
+    ],
+    "isFeatured": true,
+    "lastUpdatedBy": {
+      "externalUserId": 1,
+      "username": "+32467711709"
+    },
+    "limitPerOrder": 100,
+    "prices": [
+      {
+        "amount": 9.95,
+        "currency": "EUR",
+        "expiryDate": "2022-01-16",
+        "expiryTime": "21:30",
+        "isDefault": true,
+        "title": "default price"
+      }
+    ],
+    "productName": "Bbq Chicken",
+    "store": {
+      "externalStoreId": 1,
+      "storeName": "Pizza Heat"
+    },
+    "tags": [
+      {
+        "value": "delicious"
+      },
+      {
+        "value": "best"
+      }
+    ],
+    "taxes": [
+      {
+        "isDefault": true,
+        "percentage": 0.21,
+        "title": "standard tax"
+      }
+    ],
+    "type": "COMPLEX"
+  },
+  {
+    "categories": [
+      {
+        "title": "biriyanis"
+      }
+    ],
+    "user": {
+      "externalUserId": 1,
+      "username": "sirisha",
+      "type": "CREATED"
+    },
+    "description": "delicious biriyanis chicken ",
+    "externalProductId": 1,
+    "images": [
+      {
+        "externalMediaId": 1,
+        "isDefault": true,
+        "url": "https://www.indianhealthyrecipes.com/wp-content/uploads/2019/02/chicken-biryani-recipe.jpg"
+      }
+    ],
+    "ingredients": [
+      {
+        "ingredientName": "chicken",
+        "price": 0.0
+      },
+      {
+        "ingredientName": "basmatic rice",
+        "price": 0.0
+      },
+      {
+        "ingredientName": "biriyani spices",
+        "price": 0.0
+      }
+    ],
+    "isFeatured": true,
+    "lastUpdatedBy": {
+      "externalUserId": 1,
+      "username": "+yilmaz"
+    },
+    "limitPerOrder": 30,
+    "prices": [
+      {
+        "amount": 10.50,
+        "currency": "EUR",
+        "expiryDate": "2022-01-16",
+        "expiryTime": "21:30",
+        "isDefault": true,
+        "title": "default price"
+      }
+    ],
+    "productName": "Chicken Biriyani",
+    "store": {
+      "externalStoreId": 3,
+      "storeName": "New Delhi Traiteur"
+    },
+    "tags": [
+      {
+        "value": "delicious Biriyani"
+      }
+    ],
+    "taxes": [
+      {
+        "isDefault": true,
+        "percentage": 0.21,
+        "title": "standard tax"
+      }
+    ],
+    "type": "SIMPLE"
+  },
+  {
+    "categories": [
+      {
+        "title": "Vegetarian curry"
+      },
+      {
+        "title": "healthy meal"
+      }
+    ],
+    "user": {
+      "externalUserId": 1,
+      "username": "sirisha",
+      "type": "CREATED"
+    },
+    "description": "healthy Vegetarian curry ",
+    "externalProductId": 2,
+    "images": [
+      {
+        "externalMediaId": 1,
+        "isDefault": true,
+        "url": "https://lovingitvegan.com/wp-content/uploads/2020/01/Vegan-Curry-15.jpg"
+      }
+    ],
+    "ingredients": [
+      {
+        "ingredientName": "vegetables",
+        "price": 0.0
+      },
+      {
+        "ingredientName": "rice",
+        "price": 0.0
+      },
+      {
+        "ingredientName": "curry",
+        "price": 0.0
+      },
+      {
+        "ingredientName": "indian cheese",
+        "price": 0.0
+      }
+    ],
+    "isFeatured": true,
+    "lastUpdatedBy": {
+      "externalUserId": 1,
+      "username": "+yilmaz"
+    },
+    "limitPerOrder": 25,
+    "prices": [
+      {
+        "amount": 8.50,
+        "currency": "EUR",
+        "expiryDate": "2022-01-16",
+        "expiryTime": "21:30",
+        "isDefault": true,
+        "title": "default price"
+      }
+    ],
+    "productName": "Vegan Curry",
+    "store": {
+      "externalStoreId": 3,
+      "storeName": "New Delhi Traiteur"
+    },
+    "tags": [
+      {
+        "value": "yammy"
+      }
+    ],
+    "taxes": [
+      {
+        "isDefault": true,
+        "percentage": 0.21,
+        "title": "standard tax"
+      }
+    ],
+    "type": "SIMPLE"
+  }
+]

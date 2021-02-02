@@ -1,0 +1,70 @@
+{
+  "categories": [
+    {
+      "title": "Pasta's"
+    },
+    {
+      "title": "Main"
+    }
+  ],
+  "createdBy": {
+    "externalUserId": 1,
+    "username": "+32467711709"
+  },
+  "description": "The best spaghetti bolognese recipe",
+  "externalProductId": 0,
+  "images": [
+    {
+      "externalMediaId": 1,
+      "isDefault": true,
+      "url": "https://www.recipetineats.com/wp-content/uploads/2018/07/Spaghetti-Bolognese.jpg?w=500&h=375&crop=1"
+    }
+  ],
+  "ingredients": [
+    {
+      "ingredientName": "spaghetti",
+      "price": 0.0
+    },
+    {
+      "ingredientName": "bolognaisesaus",
+      "price": 0.0
+    }
+  ],
+  "isFeatured": true,
+  "lastUpdatedBy": {
+    "externalUserId": 1,
+    "username": "+32467711709"
+  },
+  "limitPerOrder": 50,
+  "prices": [
+    {
+      "amount": 10.00,
+      "currency": "EUR",
+      "expiryDate": "2022-01-28",
+      "expiryTime": "21:30",
+      "isDefault": true,
+      "title": "default price"
+    }
+  ],
+  "productName": "Spaghetti bolognaise",
+  "store": {
+    "externalStoreId": 1,
+    "storeName": "Pizza Heat"
+  },
+  "tags": [
+    {
+      "value": "italian"
+    },
+    {
+      "value": "classic"
+    }
+  ],
+  "taxes": [
+    {
+      "isDefault": true,
+      "percentage": 0.21,
+      "title": "standard tax"
+    }
+  ],
+  "type": "SIMPLE"
+}

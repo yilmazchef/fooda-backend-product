@@ -1,0 +1,88 @@
+{
+  "id": 17,
+  "name": "Burger updated",
+  "description": "Pizza VegaMix, chef's special for vegans and healthy menus..",
+  "limit": 250,
+  "isFeatured": true,
+  "store": {
+    "id": 31,
+    "name": "Pizza updated",
+    "externalStoreId": 11
+  },
+  "type": {
+    "id": 32,
+    "title": "Grouped"
+  },
+  "prices": [
+    {
+      "id": 23,
+      "title": "Coupon with Sodexo updated",
+      "amount": 12.5,
+      "isDefault": true,
+      "currency": "EUR"
+    }
+  ],
+  "taxes": [
+    {
+      "id": 30,
+      "title": "Standard tax for food orderings updated",
+      "percentage": 18,
+      "isDefault": true
+    }
+  ],
+  "images": [
+    {
+      "id": 21,
+      "url": "https://fooda.be/media/pizza-vegamiupdatedx01.jpg",
+      "externalMediaId": 159
+    }
+  ],
+  "categories": [
+    {
+      "id": 18,
+      "title": "pizza updated"
+    },
+    {
+      "id": 19,
+      "title": "vegan"
+    },
+    {
+      "id": 20,
+      "title": "healthy"
+    }
+  ],
+  "tags": [
+    {
+      "id": 24,
+      "value": "pizza"
+    },
+    {
+      "id": 25,
+      "value": "eat"
+    },
+    {
+      "id": 26,
+      "value": "health"
+    },
+    {
+      "id": 27,
+      "value": "diet"
+    },
+    {
+      "id": 28,
+      "value": "student"
+    },
+    {
+      "id": 29,
+      "value": "quick"
+    }
+  ],
+  "ingredients": [
+    {
+      "id": 22,
+      "ingredientName": "onions updated",
+      "parentId": null
+    }
+  ],
+  "externalProductId": 222
+}

@@ -1,0 +1,6 @@
+{
+  "name": "Eureka Product Backend API",
+  "description": "Product module.",
+  "website": "https://github.com/yilmazchef/fooda-backend-product",
+  "success_url": "/"
+}
