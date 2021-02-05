@@ -87,8 +87,10 @@ public class ProductEntity {
     }
 
     public void addPrice(PriceEntity price) {
-        price.setProduct(this);
-        this.prices.add(price);
+        if (!this.prices.contains(price)) {
+            price.setProduct(this);
+            this.prices.add(price);
+        }
     }
 
     public void removePrice(PriceEntity price) {
