@@ -1,5 +1,6 @@
 package be.fooda.backend.product.model.update;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,6 +10,7 @@ import java.time.LocalTime;
 
 @Data
 @NoArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class PriceUpdate {
 
     private String title;
