@@ -168,9 +168,10 @@ public class ProductController {
     @PostMapping(CREATE_SINGLE_PRODUCT)
     public ResponseEntity createProduct(@RequestBody @Valid ProductCreate product) {
 
-        if (!storeClient.exist(product.getStore().getEStoreId())) {
+        if (!storeClient.exist(product.getStore().getEStoreId())) { 
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(HttpFailureMassages.STORE_DOES_NOT_EXIST);
         }
+
         if (!mediaClient.exist(product.getDefaultImage().getEImageId())) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(HttpFailureMassages.MEDIA_DOES_NOT_EXIST);
         }
@@ -180,6 +181,7 @@ public class ProductController {
         if (productRepository.existByUniqueFields(example.getName(), example.getStore().getEStoreId())) {
             return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(HttpFailureMassages.PRODUCT_ALREADY_EXIST);
         }
+
         productRepository.save(example);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(HttpSuccessMassages.PRODUCT_CREATED);
