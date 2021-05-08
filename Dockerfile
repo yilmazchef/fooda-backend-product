@@ -33,4 +33,6 @@ COPY --from=build ${DEPENDENCY}/BOOT-INF/lib /app/lib
 COPY --from=build ${DEPENDENCY}/META-INF /app/META-INF
 COPY --from=build ${DEPENDENCY}/BOOT-INF/classes /app
 
+EXPOSE ${PORT}
+
 ENTRYPOINT ["java","-cp","app:app/lib/*","be.fooda.backend.product.ProductApp"]

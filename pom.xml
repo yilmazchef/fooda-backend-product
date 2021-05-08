@@ -9,9 +9,9 @@
         <relativePath /> <!-- lookup parent from repository -->
     </parent>
 
-    <artifactId>product-api</artifactId>
+    <artifactId>fooda-backend-product</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>product-api</name>
+    <name>fooda-backend-product</name>
     <description>Spring Boot microservice module for Fooda product backend</description>
     <packaging>jar</packaging>
 
