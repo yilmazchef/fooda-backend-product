@@ -1,5 +1,6 @@
 package be.fooda.backend.product.model.entity;
 
+import be.fooda.backend.product.service.validator.Name;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.search.annotations.ContainedIn;

@@ -46,7 +46,7 @@ public class PriceEntity {
     private Boolean isDefault;
 
     @Field
-    private String currency;
+    private String currency; // EURO, €, EUR -> EUR
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JsonIgnore
