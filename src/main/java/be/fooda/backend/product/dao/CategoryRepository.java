@@ -13,10 +13,10 @@ import java.util.UUID;
 @Repository
 public interface CategoryRepository extends JpaRepository<CategoryEntity, UUID> {
 
-    @Query("SELECT pc FROM CategoryEntity pc WHERE pc.product.id= :id")
+    @Query("SELECT pc FROM CategoryResponse pc WHERE pc.product.id= :id")
     List<CategoryEntity> findAllByProductId(@Param("id") UUID id);
 
-    @Query("SELECT pc FROM CategoryEntity pc WHERE pc.product.id= :productId")
+    @Query("SELECT pc FROM CategoryResponse pc WHERE pc.product.id= :productId")
     Optional<CategoryEntity> findByProductId(@Param("productId") UUID productId);
 
 }

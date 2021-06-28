@@ -13,6 +13,6 @@ import java.util.UUID;
 public interface TaxRepository extends JpaRepository<TaxEntity, UUID> {
 
 
-    @Query("SELECT px FROM TaxEntity px WHERE px.product.id= :productId")
+    @Query("SELECT px FROM TaxResponse px WHERE px.product.id= :productId")
     List<TaxEntity> findAllByProductId(@Param("productId") UUID productId);
 }

@@ -1,7 +1,7 @@
 package be.fooda.backend.product.client;
 
-import be.fooda.backend.product.model.create.StoreCreate;
-import be.fooda.backend.product.model.update.StoreUpdate;
+import be.fooda.backend.product.model.request.StoreCreate;
+import be.fooda.backend.product.model.request.StoreUpdate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

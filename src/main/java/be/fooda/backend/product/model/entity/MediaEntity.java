@@ -4,12 +4,10 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.search.annotations.ContainedIn;
 import org.hibernate.search.annotations.Field;
-import org.hibernate.search.annotations.SortableField;
+import org.hibernate.validator.constraints.URL;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.time.LocalTime;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -19,34 +17,26 @@ import java.util.UUID;
 @NoArgsConstructor(force = true, access = AccessLevel.PUBLIC)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
-public class PriceEntity {
+public class MediaEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(columnDefinition = "BINARY(16)")
     UUID id;
 
+    @NotNull
     @Field
-    String title;
+    @Column(columnDefinition = "BINARY(16)")
+    UUID eImageId;
 
     @Field
-    BigDecimal amount;
-
-    @Field
-    @SortableField
-    LocalTime expiryTime;
-
-    @Field
-    @SortableField
-    LocalDate expiryDate;
+    @URL
+    String url;
 
     @Field
     Boolean isDefault;
 
-    @Field
-    String currency; // EURO, €, EUR -> EUR
-
-    @ManyToOne
+    @OneToOne
     @ToString.Exclude
     @ContainedIn
     ProductEntity product;
@@ -54,8 +44,8 @@ public class PriceEntity {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof PriceEntity)) return false;
-        PriceEntity that = (PriceEntity) o;
+        if (!(o instanceof MediaEntity)) return false;
+        MediaEntity that = (MediaEntity) o;
         return Objects.equals(getId(), that.getId());
     }
 

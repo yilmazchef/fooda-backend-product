@@ -1,42 +1,52 @@
 package be.fooda.backend.product.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 import org.hibernate.search.annotations.ContainedIn;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.validator.constraints.Range;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.util.Objects;
 import java.util.UUID;
 
-@EntityListeners(AuditingEntityListener.class)
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor(force = true, access = AccessLevel.PUBLIC)
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 public class TaxEntity {
 
-    @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(columnDefinition = "BINARY(16)")
-    private UUID id;
+    UUID id;
 
     @Field
-    private String title;
+    String title;
 
     @Field
     @Range(min = 0,max = 100)
-    private Double percentage;
+    Double percentage;
 
-    private Boolean isDefault;
+    Boolean isDefault;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    @JsonIgnore
+    @ManyToOne
     @ToString.Exclude
     @ContainedIn
-    private ProductEntity product;
+    ProductEntity product;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof TaxEntity)) return false;
+        TaxEntity taxEntity = (TaxEntity) o;
+        return Objects.equals(getId(), taxEntity.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
+    }
 }

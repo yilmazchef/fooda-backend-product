@@ -14,9 +14,9 @@ import java.util.UUID;
 public interface PriceRepository extends JpaRepository<PriceEntity, UUID> {
 
 
-    @Query("SELECT pp FROM PriceEntity pp WHERE pp.product.id= :productId")
+    @Query("SELECT pp FROM PriceResponse pp WHERE pp.product.id= :productId")
     List<PriceEntity> findAllByProductId(@Param("productId") UUID productId);
 
-    @Query("SELECT pp FROM PriceEntity pp WHERE pp.product.id= :productId")
+    @Query("SELECT pp FROM PriceResponse pp WHERE pp.product.id= :productId")
     Optional<PriceEntity> findByProductId(@Param("productId") UUID productId);
 }

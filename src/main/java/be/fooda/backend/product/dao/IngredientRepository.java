@@ -12,12 +12,12 @@ import java.util.UUID;
 
 public interface IngredientRepository extends JpaRepository<IngredientEntity, UUID> {
 
-    @Query("SELECT pi FROM IngredientEntity pi WHERE pi.product.id= :id")
+    @Query("SELECT pi FROM IngredientResponse pi WHERE pi.product.id= :id")
     List<IngredientEntity> findAllByProductId(@Param("id") UUID id);
 
-    @Query("SELECT CASE WHEN COUNT(pi) > 0 THEN true ELSE false END FROM IngredientEntity pi WHERE pi.ingredientName = :ingredientName AND pi.price = :price")
+    @Query("SELECT CASE WHEN COUNT(pi) > 0 THEN true ELSE false END FROM IngredientResponse pi WHERE pi.ingredientName = :ingredientName AND pi.price = :price")
     boolean existByUniqueFields(@Param("ingredientName") String ingredientName, @Param("price") BigDecimal price);
 
-    @Query("SELECT pi FROM IngredientEntity pi WHERE pi.product.id= :productId")
+    @Query("SELECT pi FROM IngredientResponse pi WHERE pi.product.id= :productId")
     Optional<IngredientEntity> findByProductId(@Param("productId") UUID productId);
 }

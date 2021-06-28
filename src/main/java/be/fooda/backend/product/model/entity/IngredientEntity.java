@@ -1,39 +1,49 @@
 package be.fooda.backend.product.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 import org.hibernate.search.annotations.ContainedIn;
 import org.hibernate.search.annotations.Field;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Objects;
 import java.util.UUID;
 
-@EntityListeners(AuditingEntityListener.class)
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor(force = true, access = AccessLevel.PUBLIC)
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 public class IngredientEntity {
 
-    @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(columnDefinition = "BINARY(16)")
-    private UUID id;
+    UUID id;
 
     @Field
-    private String ingredientName;
+    String ingredientName;
 
     @Field
-    private BigDecimal price= BigDecimal.valueOf(0.0);
+    BigDecimal price= BigDecimal.valueOf(0.0);
 
-
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    @JsonIgnore
+    @ManyToOne
     @ToString.Exclude
     @ContainedIn
-    private ProductEntity product;
+    ProductEntity product;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof IngredientEntity)) return false;
+        IngredientEntity that = (IngredientEntity) o;
+        return Objects.equals(getId(), that.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
+    }
 }

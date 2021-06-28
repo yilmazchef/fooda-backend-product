@@ -1,9 +1,7 @@
 package be.fooda.backend.product.model.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.search.annotations.Field;
@@ -11,62 +9,61 @@ import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.IndexedEmbedded;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-@EntityListeners(AuditingEntityListener.class)
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor(force = true, access = AccessLevel.PUBLIC)
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 @Indexed
 public class ProductEntity {
 
-    @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(columnDefinition = "BINARY(16)")
-    private UUID id;
+    UUID id;
 
-    private Boolean isActive = Boolean.TRUE;
+    Boolean isActive = Boolean.TRUE;
 
     @Field
-    private String name;
+    String name;
 
-    private String eTrackingId;
+    String eTrackingId;
 
     @CreatedBy
-    private String createdBy;
+    String createdBy;
 
     @LastModifiedBy
-    private String lastModifiedBy;
+    String lastModifiedBy;
 
     @CreationTimestamp
-    private LocalDateTime createdAt;
+    LocalDateTime createdAt;
 
     @UpdateTimestamp
-    private LocalDateTime updatedAt;
+    LocalDateTime updatedAt;
 
     @Lob
     @Field
-    private String description;
+    String description;
 
     @Field
-    private Integer limitPerOrder;
+    Integer limitPerOrder;
 
     @Field
-    private Boolean isFeatured;
+    Boolean isFeatured;
 
-    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
+    @OneToOne
     @IndexedEmbedded
-    private StoreEntity store;
+    StoreEntity store;
 
     public void setStore(StoreEntity store) {
         store.setProduct(this);
@@ -75,11 +72,12 @@ public class ProductEntity {
 
     @Enumerated(value = EnumType.STRING)
     @Field
-    private TypeEntity type;
+    TypeEntity type;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     @IndexedEmbedded
-    private List<PriceEntity> prices = new ArrayList<>();
+    @ToString.Exclude
+    List<PriceEntity> prices = new ArrayList<>();
 
     public void setPrices(List<PriceEntity> prices) {
         this.prices = prices
@@ -100,14 +98,15 @@ public class ProductEntity {
         this.prices.remove(price);
     }
 
-    private PriceEntity setOnePrice(PriceEntity price) {
+    PriceEntity setOnePrice(PriceEntity price) {
         price.setProduct(this);
         return price;
     }
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     @IndexedEmbedded
-    private List<TaxEntity> taxes = new ArrayList<>();
+    @ToString.Exclude
+    List<TaxEntity> taxes = new ArrayList<>();
 
     public void addTax(TaxEntity tax) {
         tax.setProduct(this);
@@ -125,23 +124,24 @@ public class ProductEntity {
                 .collect(Collectors.toList());
     }
 
-    private TaxEntity setOneTax(TaxEntity tax) {
+    TaxEntity setOneTax(TaxEntity tax) {
         tax.setProduct(this);
         return tax;
     }
 
     @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
     @IndexedEmbedded
-    private ImageEntity defaultImage;
+    MediaEntity defaultImage;
 
-    public void setDefaultImage(ImageEntity defaultImage) {
+    public void setDefaultImage(MediaEntity defaultImage) {
         defaultImage.setProduct(this);
         this.defaultImage = defaultImage;
     }
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     @IndexedEmbedded
-    private List<CategoryEntity> categories = new ArrayList<>();
+    @ToString.Exclude
+    List<CategoryEntity> categories = new ArrayList<>();
 
     public void addCategory(CategoryEntity category) {
         category.setProduct(this);
@@ -160,14 +160,15 @@ public class ProductEntity {
                 .collect(Collectors.toList());
     }
 
-    private CategoryEntity setOneCategory(CategoryEntity category) {
+    CategoryEntity setOneCategory(CategoryEntity category) {
         category.setProduct(this);
         return category;
     }
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     @IndexedEmbedded
-    private List<TagEntity> tags = new ArrayList<>();
+    @ToString.Exclude
+    List<TagEntity> tags = new ArrayList<>();
 
     public void addTag(TagEntity tag) {
         tag.setProduct(this);
@@ -187,14 +188,15 @@ public class ProductEntity {
 
     }
 
-    private TagEntity setOneTag(TagEntity tag) {
+    TagEntity setOneTag(TagEntity tag) {
         tag.setProduct(this);
         return tag;
     }
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     @IndexedEmbedded
-    private List<IngredientEntity> ingredients = new ArrayList<>();
+    @ToString.Exclude
+    List<IngredientEntity> ingredients = new ArrayList<>();
 
     public void addIngredient(IngredientEntity ingredient) {
         ingredient.setProduct(this);
@@ -212,10 +214,22 @@ public class ProductEntity {
                 .collect(Collectors.toList());
     }
 
-    private IngredientEntity setOneIngredient(IngredientEntity ingredient) {
+    IngredientEntity setOneIngredient(IngredientEntity ingredient) {
         ingredient.setProduct(this);
         return ingredient;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ProductEntity)) return false;
+        ProductEntity that = (ProductEntity) o;
+        return Objects.equals(getId(), that.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
+    }
 }
 

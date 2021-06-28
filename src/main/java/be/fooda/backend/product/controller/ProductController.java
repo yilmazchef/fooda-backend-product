@@ -4,12 +4,12 @@ import be.fooda.backend.product.client.MediaClient;
 import be.fooda.backend.product.client.StoreClient;
 import be.fooda.backend.product.dao.ProductRepository;
 import be.fooda.backend.product.dao.ProductSearch;
-import be.fooda.backend.product.model.create.ProductCreate;
+import be.fooda.backend.product.model.request.ProductCreate;
 import be.fooda.backend.product.model.entity.ProductEntity;
 import be.fooda.backend.product.model.entity.TypeEntity;
 import be.fooda.backend.product.model.http.HttpFailureMassages;
 import be.fooda.backend.product.model.http.HttpSuccessMassages;
-import be.fooda.backend.product.service.mapper.ProductMapper;
+import be.fooda.backend.product.mapper.ProductMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -167,23 +167,8 @@ public class ProductController {
 
     @PostMapping(CREATE_SINGLE_PRODUCT)
     public ResponseEntity createProduct(@RequestBody @Valid ProductCreate product) {
-
-        if (!storeClient.exist(product.getStore().getEStoreId())) { 
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(HttpFailureMassages.STORE_DOES_NOT_EXIST);
-        }
-
-        if (!mediaClient.exist(product.getDefaultImage().getEImageId())) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(HttpFailureMassages.MEDIA_DOES_NOT_EXIST);
-        }
-
         final ProductEntity example = productMapper.toEntity(product);
-
-        if (productRepository.existByUniqueFields(example.getName(), example.getStore().getEStoreId())) {
-            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(HttpFailureMassages.PRODUCT_ALREADY_EXIST);
-        }
-
         productRepository.save(example);
-
         return ResponseEntity.status(HttpStatus.CREATED).body(HttpSuccessMassages.PRODUCT_CREATED);
     }
 

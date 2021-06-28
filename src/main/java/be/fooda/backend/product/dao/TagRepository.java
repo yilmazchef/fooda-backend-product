@@ -12,9 +12,9 @@ import java.util.UUID;
 @Repository
 public interface TagRepository extends JpaRepository<TagEntity, UUID> {
 
-    @Query("SELECT CASE WHEN COUNT(pt) > 0 THEN true ELSE false END FROM TagEntity pt WHERE pt.value = :value ")
+    @Query("SELECT CASE WHEN COUNT(pt) > 0 THEN true ELSE false END FROM TagResponse pt WHERE pt.value = :value ")
     boolean existByUniqueFields(@Param("value") String value);
 
-    @Query("SELECT pt FROM TagEntity pt WHERE pt.product.id= :productId")
+    @Query("SELECT pt FROM TagResponse pt WHERE pt.product.id= :productId")
     List<TagEntity> findAllByProductId(@Param("productId") UUID productId);
 }
