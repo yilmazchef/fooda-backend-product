@@ -4,7 +4,7 @@ import be.fooda.backend.product.client.MediaClient;
 import be.fooda.backend.product.client.StoreClient;
 import be.fooda.backend.product.dao.ProductRepository;
 import be.fooda.backend.product.dao.ProductSearch;
-import be.fooda.backend.product.model.request.ProductCreate;
+import be.fooda.backend.product.model.dto.CreateProductRequest;
 import be.fooda.backend.product.model.entity.ProductEntity;
 import be.fooda.backend.product.model.entity.TypeEntity;
 import be.fooda.backend.product.model.http.HttpFailureMassages;
@@ -158,7 +158,7 @@ public class ProductController {
     }
 
     @PostMapping(CREATE_LIST_OF_PRODUCTS)
-    public List<ResponseEntity> createListOfProducts(@RequestBody @Valid List<ProductCreate> products) {
+    public List<ResponseEntity> createListOfProducts(@RequestBody @Valid List<CreateProductRequest> products) {
 
         return products.stream()
                 .map(this::createProduct)
@@ -166,7 +166,7 @@ public class ProductController {
     }
 
     @PostMapping(CREATE_SINGLE_PRODUCT)
-    public ResponseEntity createProduct(@RequestBody @Valid ProductCreate product) {
+    public ResponseEntity createProduct(@RequestBody @Valid CreateProductRequest product) {
         final ProductEntity example = productMapper.toEntity(product);
         productRepository.save(example);
         return ResponseEntity.status(HttpStatus.CREATED).body(HttpSuccessMassages.PRODUCT_CREATED);

@@ -13,7 +13,7 @@ import java.util.UUID;
 @Setter
 @ToString
 @NoArgsConstructor(force = true, access = AccessLevel.PUBLIC)
-@FieldDefaults(makeFinal = false, level = AccessLevel.PRIVATE)
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 public class CategoryEntity {
 

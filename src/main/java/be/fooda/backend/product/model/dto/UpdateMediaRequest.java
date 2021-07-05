@@ -1,4 +1,4 @@
-package be.fooda.backend.product.model.request;
+package be.fooda.backend.product.model.dto;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -12,7 +12,7 @@ import java.util.UUID;
 @NoArgsConstructor(force = true, access = AccessLevel.PUBLIC)
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class MediaCreate {
+public class UpdateMediaRequest {
 
     UUID eImageId;
     String url;

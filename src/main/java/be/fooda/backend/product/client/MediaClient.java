@@ -1,7 +1,7 @@
 package be.fooda.backend.product.client;
 
-import be.fooda.backend.product.model.request.MediaCreate;
-import be.fooda.backend.product.model.request.MediaUpdate;
+import be.fooda.backend.product.model.dto.CreateMediaRequest;
+import be.fooda.backend.product.model.dto.UpdateMediaRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,11 +18,11 @@ public class MediaClient {
         return true;
     }
 
-    public boolean exist(MediaCreate image) {
+    public boolean exist(CreateMediaRequest image) {
         return true;
     }
 
-    public boolean exists(MediaUpdate image) {
+    public boolean exists(UpdateMediaRequest image) {
         return true;
     }
 }

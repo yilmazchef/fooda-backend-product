@@ -1,10 +1,8 @@
-package be.fooda.backend.product.model.request;
+package be.fooda.backend.product.model.dto;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.jackson.Jacksonized;
-
-import java.util.UUID;
 
 @Jacksonized
 @Getter
@@ -12,9 +10,9 @@ import java.util.UUID;
 @NoArgsConstructor(force = true, access = AccessLevel.PUBLIC)
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class StoreCreate {
+public class UpdateCategoryRequest {
 
-    String name;
-    UUID eStoreId;
+    String title;
+    Byte[] icon;
 
 }

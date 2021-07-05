@@ -2,7 +2,7 @@ package be.fooda.backend.product.controller;
 
 import be.fooda.backend.product.dao.IngredientRepository;
 import be.fooda.backend.product.dao.ProductRepository;
-import be.fooda.backend.product.model.request.IngredientCreate;
+import be.fooda.backend.product.model.dto.CreateIngredientRequest;
 import be.fooda.backend.product.model.entity.IngredientEntity;
 import be.fooda.backend.product.model.entity.ProductEntity;
 import be.fooda.backend.product.model.http.HttpFailureMassages;
@@ -79,7 +79,7 @@ public class IngredientController {
     }
 
     @PostMapping(ADD_INGREDIENT)
-    public ResponseEntity create(@RequestBody @Valid IngredientCreate ingredientCreate) {
+    public ResponseEntity create(@RequestBody @Valid CreateIngredientRequest ingredientCreate) {
 
         final IngredientEntity ingredient = ingredientMapper.toEntity(ingredientCreate);
 

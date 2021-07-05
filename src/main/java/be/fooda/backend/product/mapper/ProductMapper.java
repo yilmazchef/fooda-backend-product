@@ -1,10 +1,10 @@
 package be.fooda.backend.product.mapper;
 
 
-import be.fooda.backend.product.model.request.ProductCreate;
+import be.fooda.backend.product.model.dto.CreateProductRequest;
+import be.fooda.backend.product.model.dto.UpdateProductRequest;
 import be.fooda.backend.product.model.entity.ProductEntity;
-import be.fooda.backend.product.model.request.ProductUpdate;
-import be.fooda.backend.product.model.response.ProductResponse;
+import be.fooda.backend.product.model.dto.ProductResponse;
 import org.mapstruct.*;
 
 @Mapper(
@@ -15,15 +15,15 @@ import org.mapstruct.*;
 )
 public interface ProductMapper {
 
-    ProductEntity toEntity(ProductCreate source);
+    ProductEntity toEntity(CreateProductRequest source);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    ProductEntity toEntity(ProductUpdate source, @MappingTarget ProductEntity target);
+    ProductEntity toEntity(UpdateProductRequest source, @MappingTarget ProductEntity target);
 
-    ProductCreate toRequest(ProductEntity source);
+    CreateProductRequest toRequest(ProductEntity source);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    ProductUpdate toRequest(ProductEntity source, @MappingTarget ProductUpdate target);
+    UpdateProductRequest toRequest(ProductEntity source, @MappingTarget UpdateProductRequest target);
 
     ProductResponse toResponse(ProductEntity source);
 

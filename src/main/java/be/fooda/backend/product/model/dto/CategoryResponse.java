@@ -1,13 +1,9 @@
-package be.fooda.backend.product.model.response;
+package be.fooda.backend.product.model.dto;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.jackson.Jacksonized;
-import org.hibernate.search.annotations.ContainedIn;
-import org.hibernate.search.annotations.Field;
 
-import javax.persistence.*;
-import java.util.Objects;
 import java.util.UUID;
 
 @Jacksonized
@@ -16,10 +12,11 @@ import java.util.UUID;
 @NoArgsConstructor(force = true, access = AccessLevel.PUBLIC)
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class TagResponse {
+public class CategoryResponse {
 
     UUID id;
-    String value;
+    String title;
+    Byte[] icon;
     ProductResponse product;
 
 }

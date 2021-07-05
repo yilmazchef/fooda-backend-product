@@ -1,14 +1,14 @@
-package be.fooda.backend.product.model.request;
+package be.fooda.backend.product.model.dto;
 
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.experimental.FieldDefaults;
-import lombok.extern.jackson.Jacksonized;
 
 @Getter
-@Jacksonized
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
-public enum TypeCreate {
+public enum TypeResponse {
 
     SIMPLE("A product which have no variations"),
     GROUPED("A product which has variations"),

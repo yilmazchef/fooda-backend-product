@@ -1,8 +1,8 @@
 package be.fooda.backend.product.mapper;
 
-import be.fooda.backend.product.model.request.TagCreate;
+import be.fooda.backend.product.model.dto.CreateTagRequest;
+import be.fooda.backend.product.model.dto.UpdateTagRequest;
 import be.fooda.backend.product.model.entity.TagEntity;
-import be.fooda.backend.product.model.request.TagUpdate;
 import org.mapstruct.*;
 
 @Mapper(
@@ -13,14 +13,14 @@ import org.mapstruct.*;
 )
 public interface TagMapper {
 
-    TagEntity toEntity(TagCreate source);
+    TagEntity toEntity(CreateTagRequest source);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    TagEntity toEntity(TagUpdate source, @MappingTarget TagEntity target);
+    TagEntity toEntity(UpdateTagRequest source, @MappingTarget TagEntity target);
 
-    TagCreate toCreate(TagEntity source);
+    CreateTagRequest toCreate(TagEntity source);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    TagUpdate toUpdate(TagEntity source, @MappingTarget TagUpdate target);
+    UpdateTagRequest toUpdate(TagEntity source, @MappingTarget UpdateTagRequest target);
 
 }

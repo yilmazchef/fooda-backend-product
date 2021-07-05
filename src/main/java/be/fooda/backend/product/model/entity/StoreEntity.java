@@ -1,6 +1,5 @@
 package be.fooda.backend.product.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.search.annotations.ContainedIn;

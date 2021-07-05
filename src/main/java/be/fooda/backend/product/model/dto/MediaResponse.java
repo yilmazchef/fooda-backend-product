@@ -1,12 +1,10 @@
-package be.fooda.backend.product.model.request;
+package be.fooda.backend.product.model.dto;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.jackson.Jacksonized;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.util.UUID;
 
 @Jacksonized
 @Getter
@@ -14,13 +12,12 @@ import java.time.LocalTime;
 @NoArgsConstructor(force = true, access = AccessLevel.PUBLIC)
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class PriceCreate {
+public class MediaResponse {
 
-    String title;
-    BigDecimal amount;
-    LocalTime expiryTime;
-    LocalDate expiryDate;
+    UUID id;
+    UUID eImageId;
+    String url;
     Boolean isDefault;
-    String currency;
+    ProductResponse product;
 
 }

@@ -1,8 +1,10 @@
-package be.fooda.backend.product.model.request;
+package be.fooda.backend.product.model.dto;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.jackson.Jacksonized;
+
+import java.util.UUID;
 
 @Jacksonized
 @Getter
@@ -10,9 +12,11 @@ import lombok.extern.jackson.Jacksonized;
 @NoArgsConstructor(force = true, access = AccessLevel.PUBLIC)
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class CategoryUpdate {
+public class StoreResponse {
 
-    String title;
-    Byte[] icon;
+    UUID id;
+    String name;
+    UUID eStoreId;
+    ProductResponse product;
 
 }

@@ -1,8 +1,8 @@
 package be.fooda.backend.product.mapper;
 
 import be.fooda.backend.product.model.entity.MediaEntity;
-import be.fooda.backend.product.model.request.MediaCreate;
-import be.fooda.backend.product.model.request.MediaUpdate;
+import be.fooda.backend.product.model.dto.CreateMediaRequest;
+import be.fooda.backend.product.model.dto.UpdateMediaRequest;
 import org.mapstruct.*;
 
 @Mapper(
@@ -13,14 +13,14 @@ import org.mapstruct.*;
 )
 public interface MediaMapper {
 
-    MediaEntity toEntity(MediaCreate source);
+    MediaEntity toEntity(CreateMediaRequest source);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    MediaEntity toEntity(MediaUpdate source, @MappingTarget MediaEntity target);
+    MediaEntity toEntity(UpdateMediaRequest source, @MappingTarget MediaEntity target);
 
-    MediaCreate toCreate(MediaEntity source);
+    CreateMediaRequest toCreate(MediaEntity source);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    MediaUpdate toUpdate(MediaEntity source, @MappingTarget MediaUpdate target);
+    UpdateMediaRequest toUpdate(MediaEntity source, @MappingTarget UpdateMediaRequest target);
 
 }

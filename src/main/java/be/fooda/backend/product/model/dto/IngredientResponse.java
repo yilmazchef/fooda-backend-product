@@ -1,9 +1,10 @@
-package be.fooda.backend.product.model.request;
+package be.fooda.backend.product.model.dto;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.jackson.Jacksonized;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 @Jacksonized
@@ -12,10 +13,11 @@ import java.util.UUID;
 @NoArgsConstructor(force = true, access = AccessLevel.PUBLIC)
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class MediaUpdate {
+public class IngredientResponse {
 
-    UUID eImageId;
-    String url;
-    Boolean isDefault;
+    UUID id;
+    String ingredientName;
+    BigDecimal price;
+    ProductResponse product;
 
 }

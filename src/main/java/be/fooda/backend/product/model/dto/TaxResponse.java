@@ -1,8 +1,10 @@
-package be.fooda.backend.product.model.request;
+package be.fooda.backend.product.model.dto;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.jackson.Jacksonized;
+
+import java.util.UUID;
 
 @Jacksonized
 @Getter
@@ -10,10 +12,12 @@ import lombok.extern.jackson.Jacksonized;
 @NoArgsConstructor(force = true, access = AccessLevel.PUBLIC)
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class TaxUpdate {
+public class TaxResponse {
 
+    UUID id;
     String title;
     Double percentage;
     Boolean isDefault;
+    ProductResponse product;
 
 }

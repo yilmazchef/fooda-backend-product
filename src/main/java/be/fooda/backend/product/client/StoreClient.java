@@ -1,7 +1,7 @@
 package be.fooda.backend.product.client;
 
-import be.fooda.backend.product.model.request.StoreCreate;
-import be.fooda.backend.product.model.request.StoreUpdate;
+import be.fooda.backend.product.model.dto.CreateStoreRequest;
+import be.fooda.backend.product.model.dto.UpdateStoreRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -23,7 +23,7 @@ public class StoreClient {
         return true;
     }
 
-    public boolean exist(final StoreCreate store) {
+    public boolean exist(final CreateStoreRequest store) {
 
         return true;
     }
@@ -35,7 +35,7 @@ public class StoreClient {
     }
 
 
-    public boolean exists(StoreUpdate store) {
+    public boolean exists(UpdateStoreRequest store) {
         return true;
     }
 

@@ -1,8 +1,12 @@
-package be.fooda.backend.product.model.request;
+package be.fooda.backend.product.model.dto;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.jackson.Jacksonized;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Jacksonized
 @Getter
@@ -10,8 +14,13 @@ import lombok.extern.jackson.Jacksonized;
 @NoArgsConstructor(force = true, access = AccessLevel.PUBLIC)
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class CategoryCreate {
+public class UpdatePriceRequest {
 
     String title;
-    Byte[] icon;
+    BigDecimal amount;
+    LocalTime expiryTime;
+    LocalDate expiryDate;
+    Boolean isDefault;
+    String currency;
+
 }

@@ -1,10 +1,8 @@
-package be.fooda.backend.product.model.request;
+package be.fooda.backend.product.model.dto;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.jackson.Jacksonized;
-
-import java.math.BigDecimal;
 
 @Jacksonized
 @Getter
@@ -12,8 +10,10 @@ import java.math.BigDecimal;
 @NoArgsConstructor(force = true, access = AccessLevel.PUBLIC)
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class IngredientCreate {
+public class CreateTaxRequest {
 
-    String ingredientName;
-    BigDecimal price;
+    String title;
+    Double percentage;
+    Boolean isDefault;
+
 }

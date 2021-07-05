@@ -1,8 +1,8 @@
 package be.fooda.backend.product.mapper;
 
-import be.fooda.backend.product.model.request.TaxCreate;
+import be.fooda.backend.product.model.dto.CreateTaxRequest;
+import be.fooda.backend.product.model.dto.UpdateTaxRequest;
 import be.fooda.backend.product.model.entity.TaxEntity;
-import be.fooda.backend.product.model.request.TaxUpdate;
 import org.mapstruct.*;
 
 @Mapper(
@@ -13,14 +13,14 @@ import org.mapstruct.*;
 )
 public interface TaxMapper {
 
-    TaxEntity toEntity(TaxCreate source);
+    TaxEntity toEntity(CreateTaxRequest source);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    TaxEntity toEntity(TaxUpdate source, @MappingTarget TaxEntity target);
+    TaxEntity toEntity(UpdateTaxRequest source, @MappingTarget TaxEntity target);
 
-    TaxCreate toCreate(TaxEntity source);
+    CreateTaxRequest toCreate(TaxEntity source);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    TaxUpdate toUpdate(TaxEntity source, @MappingTarget TaxUpdate target);
+    UpdateTaxRequest toUpdate(TaxEntity source, @MappingTarget UpdateTaxRequest target);
 
 }

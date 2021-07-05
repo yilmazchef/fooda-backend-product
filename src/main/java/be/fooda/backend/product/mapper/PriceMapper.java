@@ -1,7 +1,7 @@
 package be.fooda.backend.product.mapper;
 
-import be.fooda.backend.product.model.request.PriceCreate;
-import be.fooda.backend.product.model.request.PriceUpdate;
+import be.fooda.backend.product.model.dto.CreatePriceRequest;
+import be.fooda.backend.product.model.dto.UpdatePriceRequest;
 import be.fooda.backend.product.model.entity.PriceEntity;
 import org.mapstruct.*;
 
@@ -13,14 +13,14 @@ import org.mapstruct.*;
 )
 public interface PriceMapper {
 
-    PriceEntity toEntity(PriceCreate source);
+    PriceEntity toEntity(CreatePriceRequest source);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    PriceEntity toEntity(PriceUpdate source, @MappingTarget PriceEntity target);
+    PriceEntity toEntity(UpdatePriceRequest source, @MappingTarget PriceEntity target);
 
-    PriceCreate toCreate(PriceEntity source);
+    CreatePriceRequest toCreate(PriceEntity source);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    PriceUpdate toUpdate(PriceEntity source, @MappingTarget PriceUpdate target);
+    UpdatePriceRequest toUpdate(PriceEntity source, @MappingTarget UpdatePriceRequest target);
 
 }

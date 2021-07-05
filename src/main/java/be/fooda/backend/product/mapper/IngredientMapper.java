@@ -1,8 +1,8 @@
 package be.fooda.backend.product.mapper;
 
-import be.fooda.backend.product.model.request.IngredientCreate;
+import be.fooda.backend.product.model.dto.CreateIngredientRequest;
+import be.fooda.backend.product.model.dto.UpdateIngredientRequest;
 import be.fooda.backend.product.model.entity.IngredientEntity;
-import be.fooda.backend.product.model.request.IngredientUpdate;
 import org.mapstruct.*;
 
 @Mapper(
@@ -13,14 +13,14 @@ import org.mapstruct.*;
 )
 public interface IngredientMapper {
 
-    IngredientEntity toEntity(IngredientCreate source);
+    IngredientEntity toEntity(CreateIngredientRequest source);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    IngredientEntity toEntity(IngredientUpdate source, @MappingTarget IngredientEntity target);
+    IngredientEntity toEntity(UpdateIngredientRequest source, @MappingTarget IngredientEntity target);
 
-    IngredientCreate toCreate(IngredientEntity source);
+    CreateIngredientRequest toCreate(IngredientEntity source);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    IngredientUpdate toUpdate(IngredientEntity source, @MappingTarget IngredientUpdate target);
+    UpdateIngredientRequest toUpdate(IngredientEntity source, @MappingTarget UpdateIngredientRequest target);
 
 }

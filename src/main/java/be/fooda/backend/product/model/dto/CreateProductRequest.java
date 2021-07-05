@@ -1,4 +1,4 @@
-package be.fooda.backend.product.model.request;
+package be.fooda.backend.product.model.dto;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -12,21 +12,21 @@ import java.util.List;
 @NoArgsConstructor(force = true, access = AccessLevel.PUBLIC)
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class ProductCreate {
+public class CreateProductRequest {
 
     String name;
     String eTrackingId;
     String description;
     Integer limitPerOrder;
     Boolean isFeatured;
-    StoreCreate store;
-    TypeCreate type;
-    List<PriceCreate> prices;
-    List<TaxCreate> taxes;
-    MediaCreate defaultImage;
-    List<CategoryCreate> categories;
-    List<TagCreate> tags;
-    List<IngredientCreate> ingredients;
+    CreateStoreRequest store;
+    CreateTypeRequest type;
+    List<CreatePriceRequest> prices;
+    List<CreateTaxRequest> taxes;
+    CreateMediaRequest defaultImage;
+    List<CreateCategoryRequest> categories;
+    List<CreateTagRequest> tags;
+    List<CreateIngredientRequest> ingredients;
 
 }
 

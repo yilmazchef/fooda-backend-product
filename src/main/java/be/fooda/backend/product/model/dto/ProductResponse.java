@@ -1,4 +1,4 @@
-package be.fooda.backend.product.model.response;
+package be.fooda.backend.product.model.dto;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;

@@ -1,8 +1,8 @@
 package be.fooda.backend.product.mapper;
 
 import be.fooda.backend.product.model.entity.CategoryEntity;
-import be.fooda.backend.product.model.request.CategoryCreate;
-import be.fooda.backend.product.model.request.CategoryUpdate;
+import be.fooda.backend.product.model.dto.CreateCategoryRequest;
+import be.fooda.backend.product.model.dto.UpdateCategoryRequest;
 import org.mapstruct.*;
 
 @Mapper(
@@ -13,14 +13,14 @@ import org.mapstruct.*;
 )
 public interface CategoryMapper {
 
-    CategoryEntity toEntity(CategoryCreate source);
+    CategoryEntity toEntity(CreateCategoryRequest source);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    CategoryEntity toEntity(CategoryUpdate source, @MappingTarget CategoryEntity target);
+    CategoryEntity toEntity(UpdateCategoryRequest source, @MappingTarget CategoryEntity target);
 
-    CategoryCreate toCreate(CategoryEntity source);
+    CreateCategoryRequest toCreate(CategoryEntity source);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    CategoryUpdate toUpdate(CategoryEntity source, @MappingTarget CategoryUpdate target);
+    UpdateCategoryRequest toUpdate(CategoryEntity source, @MappingTarget UpdateCategoryRequest target);
 
 }

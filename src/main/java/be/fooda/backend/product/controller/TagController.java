@@ -2,7 +2,7 @@ package be.fooda.backend.product.controller;
 
 import be.fooda.backend.product.dao.ProductRepository;
 import be.fooda.backend.product.dao.TagRepository;
-import be.fooda.backend.product.model.request.TagCreate;
+import be.fooda.backend.product.model.dto.CreateTagRequest;
 import be.fooda.backend.product.model.entity.ProductEntity;
 import be.fooda.backend.product.model.entity.TagEntity;
 import be.fooda.backend.product.model.http.HttpFailureMassages;
@@ -59,7 +59,7 @@ public class TagController {
     }
 
     @PostMapping("add_tag")
-    public ResponseEntity addTag(@RequestBody @Valid TagCreate tagCreate) {
+    public ResponseEntity addTag(@RequestBody @Valid CreateTagRequest tagCreate) {
 
         final TagEntity tag = tagMapper.toEntity(tagCreate);
 
