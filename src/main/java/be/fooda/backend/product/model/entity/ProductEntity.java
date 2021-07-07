@@ -4,9 +4,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.hibernate.search.annotations.Field;
-import org.hibernate.search.annotations.Indexed;
-import org.hibernate.search.annotations.IndexedEmbedded;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.*;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.LastModifiedBy;
 
@@ -34,11 +32,10 @@ public class ProductEntity {
 
     Boolean isActive = Boolean.TRUE;
 
-    @Field
+    @FullTextField
     String name;
 
-    String helloWorld;
-
+    @KeywordField
     String eTrackingId;
 
     @CreatedBy
@@ -52,19 +49,19 @@ public class ProductEntity {
 
     @UpdateTimestamp
     LocalDateTime updatedAt;
-    
+
     @Lob
-    @Field
+    @FullTextField
     String description;
 
-    @Field
+    @FullTextField
+    @GenericField
     Integer limitPerOrder;
 
-    @Field
     Boolean isFeatured;
 
-    @OneToOne
     @IndexedEmbedded
+    @OneToOne
     StoreEntity store;
 
     public void setStore(StoreEntity store) {
@@ -72,13 +69,14 @@ public class ProductEntity {
         this.store = store;
     }
 
+    @FullTextField
+    @IndexedEmbedded
     @Enumerated(value = EnumType.STRING)
-    @Field
     TypeEntity type;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-    @IndexedEmbedded
     @ToString.Exclude
+    @IndexedEmbedded
     List<PriceEntity> prices = new ArrayList<>();
 
     public void setPrices(List<PriceEntity> prices) {
@@ -141,8 +139,8 @@ public class ProductEntity {
     }
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-    @IndexedEmbedded
     @ToString.Exclude
+    @IndexedEmbedded
     List<CategoryEntity> categories = new ArrayList<>();
 
     public void addCategory(CategoryEntity category) {
@@ -168,8 +166,8 @@ public class ProductEntity {
     }
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-    @IndexedEmbedded
     @ToString.Exclude
+    @IndexedEmbedded
     List<TagEntity> tags = new ArrayList<>();
 
     public void addTag(TagEntity tag) {
@@ -196,8 +194,8 @@ public class ProductEntity {
     }
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-    @IndexedEmbedded
     @ToString.Exclude
+    @IndexedEmbedded
     List<IngredientEntity> ingredients = new ArrayList<>();
 
     public void addIngredient(IngredientEntity ingredient) {

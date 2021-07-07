@@ -2,8 +2,9 @@ package be.fooda.backend.product.model.entity;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.hibernate.search.annotations.ContainedIn;
-import org.hibernate.search.annotations.Field;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.GenericField;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
 import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
@@ -16,6 +17,7 @@ import java.util.UUID;
 @NoArgsConstructor(force = true, access = AccessLevel.PUBLIC)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
+@Indexed
 public class TaxEntity {
 
     @Id
@@ -23,18 +25,17 @@ public class TaxEntity {
     @Column(columnDefinition = "BINARY(16)")
     UUID id;
 
-    @Field
+    @FullTextField
     String title;
 
-    @Field
-    @Range(min = 0,max = 100)
+    @GenericField
+    @Range(min = 0, max = 100)
     Double percentage;
 
     Boolean isDefault;
 
     @ManyToOne
     @ToString.Exclude
-    @ContainedIn
     ProductEntity product;
 
     @Override

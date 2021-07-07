@@ -2,8 +2,8 @@ package be.fooda.backend.product.model.entity;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.hibernate.search.annotations.ContainedIn;
-import org.hibernate.search.annotations.Field;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
 import org.hibernate.validator.constraints.URL;
 
 import javax.persistence.*;
@@ -17,6 +17,7 @@ import java.util.UUID;
 @NoArgsConstructor(force = true, access = AccessLevel.PUBLIC)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
+@Indexed
 public class MediaEntity {
 
     @Id
@@ -25,20 +26,17 @@ public class MediaEntity {
     UUID id;
 
     @NotNull
-    @Field
     @Column(columnDefinition = "BINARY(16)")
     UUID eImageId;
 
-    @Field
+    @FullTextField
     @URL
     String url;
 
-    @Field
     Boolean isDefault;
 
     @OneToOne
     @ToString.Exclude
-    @ContainedIn
     ProductEntity product;
 
     @Override

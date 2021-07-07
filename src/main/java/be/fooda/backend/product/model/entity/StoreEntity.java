@@ -2,8 +2,9 @@ package be.fooda.backend.product.model.entity;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.hibernate.search.annotations.ContainedIn;
-import org.hibernate.search.annotations.Field;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.KeywordField;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
@@ -16,6 +17,7 @@ import java.util.UUID;
 @NoArgsConstructor(force = true, access = AccessLevel.PUBLIC)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
+@Indexed
 public class StoreEntity {
 
     @Id
@@ -23,17 +25,16 @@ public class StoreEntity {
     @Column(columnDefinition = "BINARY(16)")
     UUID id;
 
-    @Field
+    @FullTextField
     @Length(min = 2)
     String name;
 
-    @Field
+    @KeywordField
     @Column(columnDefinition = "BINARY(16)")
     UUID eStoreId;
 
     @OneToOne
     @ToString.Exclude
-    @ContainedIn
     ProductEntity product;
 
     @Override

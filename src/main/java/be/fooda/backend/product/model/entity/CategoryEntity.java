@@ -2,8 +2,8 @@ package be.fooda.backend.product.model.entity;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.hibernate.search.annotations.ContainedIn;
-import org.hibernate.search.annotations.Field;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -15,6 +15,7 @@ import java.util.UUID;
 @NoArgsConstructor(force = true, access = AccessLevel.PUBLIC)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
+@Indexed
 public class CategoryEntity {
 
     @Id
@@ -22,7 +23,7 @@ public class CategoryEntity {
     @Column(columnDefinition = "BINARY(16)")
     UUID id;
 
-    @Field
+    @FullTextField
     String title;
 
     @Lob
@@ -30,7 +31,6 @@ public class CategoryEntity {
 
     @ManyToOne
     @ToString.Exclude
-    @ContainedIn
     ProductEntity product;
 
     @Override

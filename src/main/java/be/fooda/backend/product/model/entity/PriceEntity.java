@@ -2,9 +2,9 @@ package be.fooda.backend.product.model.entity;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.hibernate.search.annotations.ContainedIn;
-import org.hibernate.search.annotations.Field;
-import org.hibernate.search.annotations.SortableField;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.GenericField;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -19,6 +19,7 @@ import java.util.UUID;
 @NoArgsConstructor(force = true, access = AccessLevel.PUBLIC)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
+@Indexed
 public class PriceEntity {
 
     @Id
@@ -26,29 +27,25 @@ public class PriceEntity {
     @Column(columnDefinition = "BINARY(16)")
     UUID id;
 
-    @Field
+    @FullTextField
     String title;
 
-    @Field
+    @GenericField
     BigDecimal amount;
 
-    @Field
-    @SortableField
+    @GenericField
     LocalTime expiryTime;
 
-    @Field
-    @SortableField
+    @GenericField
     LocalDate expiryDate;
 
-    @Field
     Boolean isDefault;
 
-    @Field
+    @FullTextField
     String currency; // EURO, €, EUR -> EUR
 
     @ManyToOne
     @ToString.Exclude
-    @ContainedIn
     ProductEntity product;
 
     @Override

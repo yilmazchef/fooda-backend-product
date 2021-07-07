@@ -2,8 +2,9 @@ package be.fooda.backend.product.model.entity;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.hibernate.search.annotations.ContainedIn;
-import org.hibernate.search.annotations.Field;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.GenericField;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -16,6 +17,7 @@ import java.util.UUID;
 @NoArgsConstructor(force = true, access = AccessLevel.PUBLIC)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
+@Indexed
 public class IngredientEntity {
 
     @Id
@@ -23,15 +25,14 @@ public class IngredientEntity {
     @Column(columnDefinition = "BINARY(16)")
     UUID id;
 
-    @Field
+    @FullTextField
     String ingredientName;
 
-    @Field
-    BigDecimal price= BigDecimal.valueOf(0.0);
+    @GenericField
+    BigDecimal price = BigDecimal.valueOf(0.0);
 
     @ManyToOne
     @ToString.Exclude
-    @ContainedIn
     ProductEntity product;
 
     @Override

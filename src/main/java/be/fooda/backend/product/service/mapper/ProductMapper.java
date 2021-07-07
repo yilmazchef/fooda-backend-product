@@ -25,7 +25,11 @@ public interface ProductMapper {
 
     ProductEntity toEntity(UpdateProductRequest source, @MappingTarget ProductEntity target);
 
+    List<ProductEntity> toEntities(List<UpdateProductRequest> sources, @MappingTarget List<ProductEntity> targets);
+
     CreateProductRequest toRequest(ProductEntity source);
+
+    List<CreateProductRequest> toRequests(List<ProductEntity> sources);
 
     UpdateProductRequest toRequest(ProductEntity source, @MappingTarget UpdateProductRequest target);
 

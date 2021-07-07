@@ -1,17 +1,18 @@
 package be.fooda.backend.product.view.controller;
 
-import be.fooda.backend.product.view.client.MediaClient;
-import be.fooda.backend.product.view.client.StoreClient;
+import be.fooda.backend.product.dao.ProductIndexer;
 import be.fooda.backend.product.dao.ProductRepository;
-import be.fooda.backend.product.dao.ProductSearch;
 import be.fooda.backend.product.model.dto.CreateProductRequest;
 import be.fooda.backend.product.model.entity.ProductEntity;
 import be.fooda.backend.product.model.entity.TypeEntity;
 import be.fooda.backend.product.model.http.HttpFailureMassages;
 import be.fooda.backend.product.model.http.HttpSuccessMassages;
 import be.fooda.backend.product.service.mapper.ProductMapper;
+import be.fooda.backend.product.view.client.MediaClient;
+import be.fooda.backend.product.view.client.StoreClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -20,12 +21,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.PositiveOrZero;
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @RestController
@@ -53,7 +51,7 @@ public class ProductController {
 
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
-    private final ProductSearch indexRepository;
+    private final ProductIndexer productIndexer;
 
     private final StoreClient storeClient;
     private final MediaClient mediaClient;
@@ -72,97 +70,12 @@ public class ProductController {
 
     @GetMapping(SEARCH_BY_PRODUCT_NAME)
     public ResponseEntity searchProductsByName(@RequestParam String productName, @RequestParam(defaultValue = "1") int pageNo, @RequestParam(defaultValue = PAGE_SIZE_PER_RESULT) int pageSize) {
-        List<ProductEntity> foundProducts = indexRepository
-                .searchProductsByName(productName, pageNo - 1, pageSize);
+        Page<ProductEntity> foundProducts = productIndexer.search(PageRequest.of(pageNo - 1, pageSize), productName);
 
-        if (foundProducts.isEmpty())
+        if (foundProducts.hasContent())
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(HttpFailureMassages.NO_PRODUCTS_FOUND);
 
-        return ResponseEntity.status(HttpStatus.FOUND).body(foundProducts);
-    }
-
-    @GetMapping(SEARCH_BY_DESCRIPTION)
-    public ResponseEntity searchProductsByDescription(@RequestParam String productDescription, @RequestParam(defaultValue = "1") int pageNo, @RequestParam(defaultValue = PAGE_SIZE_PER_RESULT) int pageSize) {
-        List<ProductEntity> foundProducts = indexRepository.searchByDescription(productDescription, pageNo - 1, pageSize);
-
-        if (foundProducts.isEmpty())
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(HttpFailureMassages.NO_PRODUCTS_FOUND);
-
-        return ResponseEntity.status(HttpStatus.FOUND).body(foundProducts);
-    }
-
-    @GetMapping(SEARCH_BY_INGREDIENTS)
-    public ResponseEntity searchProductsByIngredients(@RequestParam Set<String> ingredients, @RequestParam(defaultValue = "1") int pageNo, @RequestParam(defaultValue = PAGE_SIZE_PER_RESULT) int pageSize) {
-        List<ProductEntity> foundProducts = indexRepository.searchByIngredients(ingredients, pageNo - 1, pageSize);
-
-        if (foundProducts.isEmpty())
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(HttpFailureMassages.NO_PRODUCTS_FOUND);
-
-        return ResponseEntity.status(HttpStatus.FOUND).body(foundProducts);
-
-    }
-
-    @GetMapping(SEARCH_BY_CATEGORIES)
-    public ResponseEntity searchProductsByCategories(@RequestParam Set<String> categories, @RequestParam(defaultValue = "1") int pageNo, @RequestParam(defaultValue = PAGE_SIZE_PER_RESULT) int pageSize) {
-        List<ProductEntity> foundProducts = indexRepository.searchByCategories(categories, pageNo - 1, pageSize);
-
-        if (foundProducts.isEmpty())
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(HttpFailureMassages.NO_PRODUCTS_FOUND);
-
-        return ResponseEntity.status(HttpStatus.FOUND).body(foundProducts);
-
-    }
-
-    @GetMapping(SEARCH_BY_TAGS)
-    public ResponseEntity searchProductsByTags(@RequestParam Set<String> tags, @RequestParam(defaultValue = "1") int pageNo, @RequestParam(defaultValue = PAGE_SIZE_PER_RESULT) int pageSize) {
-        List<ProductEntity> foundProducts = indexRepository.searchByTags(tags, pageNo - 1, pageSize);
-
-        if (foundProducts.isEmpty())
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(HttpFailureMassages.NO_PRODUCTS_FOUND);
-
-        return ResponseEntity.status(HttpStatus.FOUND).body(foundProducts);
-    }
-
-    @GetMapping(FILTER_BY_PRICE_RANGE)
-    public ResponseEntity searchProductsByPriceRange(@RequestParam @PositiveOrZero BigDecimal minPrice,
-                                                     @RequestParam BigDecimal maxPrice, @RequestParam(defaultValue = "1") int pageNo,
-                                                     @RequestParam(defaultValue = PAGE_SIZE_PER_RESULT) int pageSize,
-                                                     @RequestParam(defaultValue = "true", required = false) Boolean isActive) {
-        List<ProductEntity> foundProductPrices = indexRepository.searchByPriceRange(minPrice, maxPrice, pageNo - 1, pageSize, isActive);
-
-        if (foundProductPrices.isEmpty())
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(HttpFailureMassages.NO_PRODUCTS_FOUND);
-
-        return ResponseEntity.status(HttpStatus.FOUND).body(foundProductPrices);
-    }
-
-    @GetMapping(SEARCH_BY_STORE_NAME)
-    public ResponseEntity searchByStore(@RequestParam String storeName, @RequestParam(defaultValue = "1") int pageNo, @RequestParam(defaultValue = PAGE_SIZE_PER_RESULT) int pageSize) {
-
-        final List<ProductEntity> foundProducts = indexRepository.searchByStoreName(storeName, pageNo - 1, pageSize);
-        if (foundProducts.isEmpty())
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(HttpFailureMassages.NO_STORE_FOUND);
-
-        return ResponseEntity.status(HttpStatus.FOUND).body(foundProducts);
-    }
-
-    @GetMapping(FILTER_BY_FEATURED)
-    public ResponseEntity filterFeatured(@RequestParam Boolean isFeatured, @RequestParam(defaultValue = "1") int pageNo, @RequestParam(defaultValue = PAGE_SIZE_PER_RESULT) int pageSize) {
-        List<ProductEntity> foundProducts = indexRepository.filterFeatured(isFeatured, pageNo - 1, pageSize);
-
-        if (foundProducts.isEmpty())
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(HttpFailureMassages.NO_PRODUCTS_IS_FEATURED);
-
-        return ResponseEntity.status(HttpStatus.FOUND).body(foundProducts);
-
-    }
-
-    @PostMapping(CREATE_LIST_OF_PRODUCTS)
-    public List<ResponseEntity> createListOfProducts(@RequestBody @Valid List<CreateProductRequest> products) {
-
-        return products.stream()
-                .map(this::createProduct)
-                .collect(Collectors.toList());
+        return ResponseEntity.status(HttpStatus.FOUND).body(foundProducts.getContent());
     }
 
     @PostMapping(CREATE_SINGLE_PRODUCT)
@@ -190,17 +103,6 @@ public class ProductController {
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(HttpFailureMassages.PRODUCT_DOES_NOT_EXIST);
         }
-    }
-
-    @GetMapping(COMBINED_SEARCH)
-    public ResponseEntity search(@RequestParam Set<String> keyword, @RequestParam(defaultValue = "1") int pageNo, @RequestParam(defaultValue = PAGE_SIZE_PER_RESULT) int pageSize,
-                                 @RequestParam(defaultValue = "true", required = false) Boolean isActive) {
-        final List<ProductEntity> foundProducts = indexRepository.combined(keyword, pageNo - 1, pageSize, isActive);
-
-        if (foundProducts.isEmpty())
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(HttpFailureMassages.NO_PRODUCTS_FOUND);
-
-        return ResponseEntity.status(HttpStatus.FOUND).body(foundProducts);
     }
 
 
