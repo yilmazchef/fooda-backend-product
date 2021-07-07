@@ -18,7 +18,7 @@ public interface ProductRepository extends JpaRepository<ProductEntity, UUID> {
 
     List<ProductEntity> findAllByIsActive(boolean isActive, Pageable pageable);
 
-    Optional<ProductEntity> findByNameAndStore_EStoreId(String name, UUID eStoreId);
+    Optional<ProductEntity> findByNameAndStore_StoreId(String name, UUID storeId);
 
-    boolean existsByNameAndStore_EStoreId(String name, UUID eStoreId);
+    boolean existsByNameAndStore_StoreId(String name, UUID storeId);
 }

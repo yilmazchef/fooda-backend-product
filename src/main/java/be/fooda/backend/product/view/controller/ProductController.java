@@ -132,7 +132,7 @@ public class ProductController {
         ProductEntity productBeingUpdated = foundProduct.get();
 
 
-        if (!storeClient.exist(productBeingUpdated.getStore().getEStoreId())) {
+        if (!storeClient.exist(productBeingUpdated.getStore().getStoreId())) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(HttpFailureMassages.STORE_DOES_NOT_EXIST);
         }
 

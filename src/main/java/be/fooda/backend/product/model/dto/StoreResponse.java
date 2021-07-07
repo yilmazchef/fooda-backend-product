@@ -16,7 +16,7 @@ public class StoreResponse {
 
     UUID id;
     String name;
-    UUID eStoreId;
+    UUID storeId;
     ProductResponse product;
 
 }

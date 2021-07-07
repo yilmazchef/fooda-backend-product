@@ -42,8 +42,8 @@ public class ProductFlow {
         }
 
         //  IF(PRODUCT_EXISTS)
-        boolean exists = productRepository.existsByNameAndStore_EStoreId(
-                request.getName(), request.getStore().getEStoreId()
+        boolean exists = productRepository.existsByNameAndStore_StoreId(
+                request.getName(), request.getStore().getStoreId()
         );
 
         if (exists) {

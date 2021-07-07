@@ -54,7 +54,6 @@ public class ProductEntity {
     @FullTextField
     String description;
 
-    @FullTextField
     @GenericField
     Integer limitPerOrder;
 
@@ -62,6 +61,7 @@ public class ProductEntity {
 
     @IndexedEmbedded
     @OneToOne
+    @AssociationInverseSide(inversePath = @ObjectPath(@PropertyValue(propertyName = "product")))
     StoreEntity store;
 
     public void setStore(StoreEntity store) {
@@ -70,13 +70,13 @@ public class ProductEntity {
     }
 
     @FullTextField
-    @IndexedEmbedded
     @Enumerated(value = EnumType.STRING)
     TypeEntity type;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     @ToString.Exclude
     @IndexedEmbedded
+    @AssociationInverseSide(inversePath = @ObjectPath(@PropertyValue(propertyName = "product")))
     List<PriceEntity> prices = new ArrayList<>();
 
     public void setPrices(List<PriceEntity> prices) {
@@ -106,6 +106,7 @@ public class ProductEntity {
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     @IndexedEmbedded
     @ToString.Exclude
+    @AssociationInverseSide(inversePath = @ObjectPath(@PropertyValue(propertyName = "product")))
     List<TaxEntity> taxes = new ArrayList<>();
 
     public void addTax(TaxEntity tax) {
@@ -131,6 +132,7 @@ public class ProductEntity {
 
     @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
     @IndexedEmbedded
+    @AssociationInverseSide(inversePath = @ObjectPath(@PropertyValue(propertyName = "product")))
     MediaEntity defaultImage;
 
     public void setDefaultImage(MediaEntity defaultImage) {
@@ -141,6 +143,7 @@ public class ProductEntity {
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     @ToString.Exclude
     @IndexedEmbedded
+    @AssociationInverseSide(inversePath = @ObjectPath(@PropertyValue(propertyName = "product")))
     List<CategoryEntity> categories = new ArrayList<>();
 
     public void addCategory(CategoryEntity category) {
@@ -168,6 +171,7 @@ public class ProductEntity {
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     @ToString.Exclude
     @IndexedEmbedded
+    @AssociationInverseSide(inversePath = @ObjectPath(@PropertyValue(propertyName = "product")))
     List<TagEntity> tags = new ArrayList<>();
 
     public void addTag(TagEntity tag) {
@@ -196,6 +200,7 @@ public class ProductEntity {
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     @ToString.Exclude
     @IndexedEmbedded
+    @AssociationInverseSide(inversePath = @ObjectPath(@PropertyValue(propertyName = "product")))
     List<IngredientEntity> ingredients = new ArrayList<>();
 
     public void addIngredient(IngredientEntity ingredient) {

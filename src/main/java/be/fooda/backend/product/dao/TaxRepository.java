@@ -9,10 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.UUID;
 
-@Repository
 public interface TaxRepository extends JpaRepository<TaxEntity, UUID> {
 
 
-    @Query("SELECT px FROM TaxResponse px WHERE px.product.id= :productId")
-    List<TaxEntity> findAllByProductId(@Param("productId") UUID productId);
 }

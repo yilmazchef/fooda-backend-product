@@ -16,18 +16,18 @@ import java.util.UUID;
 public class CreateStoreRequest {
 
     String name;
-    UUID eStoreId;
+    UUID storeId;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof CreateStoreRequest)) return false;
         CreateStoreRequest that = (CreateStoreRequest) o;
-        return Objects.equals(eStoreId, that.eStoreId);
+        return Objects.equals(storeId, that.storeId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(eStoreId);
+        return Objects.hash(storeId);
     }
 }

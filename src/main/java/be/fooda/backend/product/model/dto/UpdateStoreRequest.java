@@ -15,6 +15,6 @@ import java.util.UUID;
 public class UpdateStoreRequest {
 
     String name;
-    UUID eStoreId;
+    UUID storeId;
 
 }
