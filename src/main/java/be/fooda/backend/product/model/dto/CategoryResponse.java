@@ -17,6 +17,4 @@ public class CategoryResponse {
     UUID id;
     String title;
     Byte[] icon;
-    ProductResponse product;
-
 }

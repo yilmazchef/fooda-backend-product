@@ -18,6 +18,5 @@ public class IngredientResponse {
     UUID id;
     String ingredientName;
     BigDecimal price;
-    ProductResponse product;
 
 }

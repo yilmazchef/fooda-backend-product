@@ -18,6 +18,5 @@ public class MediaResponse {
     UUID eImageId;
     String url;
     Boolean isDefault;
-    ProductResponse product;
 
 }

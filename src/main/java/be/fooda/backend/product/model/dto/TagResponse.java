@@ -16,6 +16,5 @@ public class TagResponse {
 
     UUID id;
     String value;
-    ProductResponse product;
 
 }

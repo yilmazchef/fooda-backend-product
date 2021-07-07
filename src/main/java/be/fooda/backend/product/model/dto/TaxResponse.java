@@ -18,6 +18,5 @@ public class TaxResponse {
     String title;
     Double percentage;
     Boolean isDefault;
-    ProductResponse product;
 
 }

@@ -53,11 +53,12 @@ public class ProductController {
 
     @GetMapping(GET_ALL_PRODUCTS)
     public ResponseEntity<List<ProductResponse>> findAllProducts(
-            @RequestParam("pageNo") int pageNo, @RequestParam("pageSize") int pageSize) {
+            @RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize) {
 
         // START_SELECT_FLOW
         final var responses = productFlow.findAll(pageNo, pageSize);
 
+        // RETURN_ALL_PRODUCTS_IN_PAGES
         return ResponseEntity.status(HttpStatus.FOUND).body(responses);
     }
 
