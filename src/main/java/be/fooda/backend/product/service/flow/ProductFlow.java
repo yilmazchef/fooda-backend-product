@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @Service
@@ -73,12 +75,23 @@ public class ProductFlow {
         return productMapper.toResponses(pages.toList());
     }
 
+    public List<ProductEntity> findAllByIsActive(boolean active, Pageable paging) {
+        return null;
+    }
+
+    public Page<ProductEntity> search(PageRequest pageRequest, String name) {
+        return null;
+    }
+
+    public Optional<ProductEntity> findById(UUID id) {
+        return Optional.empty();
+    }
+
 
     // FIND_BY_ID
 
 
     // FIND_BY_FIRST_NAME_AND_LAST_NAME
-
 
 
 }

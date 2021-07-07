@@ -3,7 +3,6 @@ server:
 
 spring:
   jpa:
-    show-sql: true
     hibernate:
       ddl-auto: update
     database-platform: org.hibernate.dialect.MySQL8Dialect
@@ -12,8 +11,7 @@ spring:
         search:
           backend:
             directory:
-              type: local-filesystem
-              root: ./lucene
+              type: local-heap
   data:
     jpa:
       repositories:
