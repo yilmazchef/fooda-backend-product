@@ -1,7 +1,7 @@
-package be.fooda.backend.product.controller;
+package be.fooda.backend.product.view.controller;
 
-import be.fooda.backend.product.client.MediaClient;
-import be.fooda.backend.product.client.StoreClient;
+import be.fooda.backend.product.view.client.MediaClient;
+import be.fooda.backend.product.view.client.StoreClient;
 import be.fooda.backend.product.dao.ProductRepository;
 import be.fooda.backend.product.dao.ProductSearch;
 import be.fooda.backend.product.model.dto.CreateProductRequest;
@@ -9,7 +9,7 @@ import be.fooda.backend.product.model.entity.ProductEntity;
 import be.fooda.backend.product.model.entity.TypeEntity;
 import be.fooda.backend.product.model.http.HttpFailureMassages;
 import be.fooda.backend.product.model.http.HttpSuccessMassages;
-import be.fooda.backend.product.mapper.ProductMapper;
+import be.fooda.backend.product.service.mapper.ProductMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;

@@ -4,6 +4,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.jackson.Jacksonized;
 
+import java.util.Objects;
 import java.util.UUID;
 
 @Jacksonized
@@ -17,4 +18,16 @@ public class CreateStoreRequest {
     String name;
     UUID eStoreId;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof CreateStoreRequest)) return false;
+        CreateStoreRequest that = (CreateStoreRequest) o;
+        return Objects.equals(eStoreId, that.eStoreId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(eStoreId);
+    }
 }

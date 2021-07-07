@@ -1,4 +1,4 @@
-package be.fooda.backend.product.client;
+package be.fooda.backend.product.view.client;
 
 import be.fooda.backend.product.model.dto.CreateMediaRequest;
 import be.fooda.backend.product.model.dto.UpdateMediaRequest;

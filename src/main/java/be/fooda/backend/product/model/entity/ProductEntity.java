@@ -37,6 +37,8 @@ public class ProductEntity {
     @Field
     String name;
 
+    String helloWorld;
+
     String eTrackingId;
 
     @CreatedBy
@@ -50,7 +52,7 @@ public class ProductEntity {
 
     @UpdateTimestamp
     LocalDateTime updatedAt;
-
+    
     @Lob
     @Field
     String description;

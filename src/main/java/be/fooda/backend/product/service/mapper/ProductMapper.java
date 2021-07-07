@@ -1,4 +1,4 @@
-package be.fooda.backend.product.mapper;
+package be.fooda.backend.product.service.mapper;
 
 
 import be.fooda.backend.product.model.dto.CreateProductRequest;
@@ -8,6 +8,7 @@ import be.fooda.backend.product.model.entity.ProductEntity;
 import org.mapstruct.*;
 
 import java.util.Set;
+import java.util.List;
 
 @Mapper(
         nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS,
@@ -20,6 +21,8 @@ public interface ProductMapper {
 
     Set<ProductEntity> toEntities(Set<CreateProductRequest> sourceSet);
 
+    List<ProductEntity> toEntities(List<CreateProductRequest> sourceList);
+
     ProductEntity toEntity(UpdateProductRequest source, @MappingTarget ProductEntity target);
 
     CreateProductRequest toRequest(ProductEntity source);
@@ -29,5 +32,7 @@ public interface ProductMapper {
     ProductResponse toResponse(ProductEntity source);
 
     Set<ProductResponse> toResponses(Set<ProductEntity> sourceSet);
+
+    List<ProductResponse> toResponses(List<ProductEntity> sourceList);
 
 }

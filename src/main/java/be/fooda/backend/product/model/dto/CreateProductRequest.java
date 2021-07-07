@@ -5,6 +5,7 @@ import lombok.experimental.FieldDefaults;
 import lombok.extern.jackson.Jacksonized;
 
 import java.util.List;
+import java.util.Objects;
 
 @Jacksonized
 @Getter
@@ -13,6 +14,8 @@ import java.util.List;
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CreateProductRequest {
+
+    // UNIQUE: name + eStoreId
 
     String name;
     String eTrackingId;
@@ -28,5 +31,17 @@ public class CreateProductRequest {
     List<CreateTagRequest> tags;
     List<CreateIngredientRequest> ingredients;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof CreateProductRequest)) return false;
+        CreateProductRequest that = (CreateProductRequest) o;
+        return Objects.equals(getName(), that.getName()) && Objects.equals(getStore(), that.getStore());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getName(), getStore());
+    }
 }
 

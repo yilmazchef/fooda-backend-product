@@ -1,4 +1,4 @@
-package be.fooda.backend.product.mapper;
+package be.fooda.backend.product.service.mapper;
 
 import be.fooda.backend.product.model.dto.CreatePriceRequest;
 import be.fooda.backend.product.model.dto.UpdatePriceRequest;

@@ -1,4 +1,4 @@
-package be.fooda.backend.product.controller;
+package be.fooda.backend.product.view.controller;
 
 import be.fooda.backend.product.dao.ProductRepository;
 import be.fooda.backend.product.dao.TaxRepository;

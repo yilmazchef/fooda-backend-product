@@ -1,4 +1,4 @@
-package be.fooda.backend.product.controller;
+package be.fooda.backend.product.view.controller;
 
 import be.fooda.backend.product.dao.IngredientRepository;
 import be.fooda.backend.product.dao.ProductRepository;
@@ -7,7 +7,7 @@ import be.fooda.backend.product.model.entity.IngredientEntity;
 import be.fooda.backend.product.model.entity.ProductEntity;
 import be.fooda.backend.product.model.http.HttpFailureMassages;
 import be.fooda.backend.product.model.http.HttpSuccessMassages;
-import be.fooda.backend.product.mapper.IngredientMapper;
+import be.fooda.backend.product.service.mapper.IngredientMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

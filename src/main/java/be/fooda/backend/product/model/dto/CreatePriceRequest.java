@@ -5,8 +5,6 @@ import lombok.experimental.FieldDefaults;
 import lombok.extern.jackson.Jacksonized;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.time.LocalTime;
 
 @Jacksonized
 @Getter
@@ -16,11 +14,6 @@ import java.time.LocalTime;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CreatePriceRequest {
 
-    String title;
     BigDecimal amount;
-    LocalTime expiryTime;
-    LocalDate expiryDate;
-    Boolean isDefault;
-    String currency;
 
 }

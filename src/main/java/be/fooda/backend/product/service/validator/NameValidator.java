@@ -1,4 +1,4 @@
-package be.fooda.backend.product.validator;
+package be.fooda.backend.product.service.validator;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
