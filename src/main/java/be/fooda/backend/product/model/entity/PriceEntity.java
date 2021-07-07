@@ -41,7 +41,7 @@ public class PriceEntity {
     @FullTextField
     String currency; // EURO, €, EUR -> EUR
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @ToString.Exclude
     ProductEntity product;
 

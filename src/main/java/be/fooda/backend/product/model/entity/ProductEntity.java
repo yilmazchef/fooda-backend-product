@@ -60,7 +60,10 @@ public class ProductEntity {
     Boolean isFeatured;
 
     @IndexedEmbedded
-    @OneToOne
+    @OneToOne(
+            mappedBy = "product",
+            orphanRemoval = true,
+            cascade = CascadeType.ALL)
     @AssociationInverseSide(inversePath = @ObjectPath(@PropertyValue(propertyName = "product")))
     StoreEntity store;
 
@@ -73,7 +76,11 @@ public class ProductEntity {
     @Enumerated(value = EnumType.STRING)
     TypeEntity type;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    @OneToMany(
+            mappedBy = "product",
+            orphanRemoval = true,
+            cascade = CascadeType.ALL
+    )
     @ToString.Exclude
     @IndexedEmbedded
     @AssociationInverseSide(inversePath = @ObjectPath(@PropertyValue(propertyName = "product")))
@@ -103,7 +110,10 @@ public class ProductEntity {
         return price;
     }
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    @OneToMany(
+            mappedBy = "product",
+            cascade = CascadeType.ALL
+    )
     @IndexedEmbedded
     @ToString.Exclude
     @AssociationInverseSide(inversePath = @ObjectPath(@PropertyValue(propertyName = "product")))

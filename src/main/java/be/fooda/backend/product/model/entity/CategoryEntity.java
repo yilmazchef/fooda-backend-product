@@ -27,7 +27,7 @@ public class CategoryEntity {
     @Lob
     Byte[] icon;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @ToString.Exclude
     ProductEntity product;
 

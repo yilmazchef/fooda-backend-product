@@ -31,7 +31,7 @@ public class TaxEntity {
 
     Boolean isDefault;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @ToString.Exclude
     ProductEntity product;
 
@@ -39,7 +39,7 @@ public class TaxEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof TaxEntity)) return false;
-        TaxEntity taxEntity = (TaxEntity) o;
+        final var taxEntity = (TaxEntity) o;
         return Objects.equals(getId(), taxEntity.getId());
     }
 

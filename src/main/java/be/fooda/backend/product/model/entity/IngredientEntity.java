@@ -28,7 +28,7 @@ public class IngredientEntity {
     @GenericField
     BigDecimal price = BigDecimal.valueOf(0.0);
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @ToString.Exclude
     ProductEntity product;
 

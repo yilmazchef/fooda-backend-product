@@ -30,7 +30,7 @@ public class StoreEntity {
     @Column(columnDefinition = "BINARY(16)")
     UUID storeId;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @ToString.Exclude
     ProductEntity product;
 

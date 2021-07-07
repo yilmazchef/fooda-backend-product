@@ -33,7 +33,7 @@ public class MediaEntity {
 
     Boolean isDefault;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @ToString.Exclude
     ProductEntity product;
 

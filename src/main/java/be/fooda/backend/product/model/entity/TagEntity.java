@@ -24,7 +24,7 @@ public class TagEntity {
     @FullTextField
     String value;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @ToString.Exclude
     ProductEntity product;
 
@@ -32,7 +32,7 @@ public class TagEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof TagEntity)) return false;
-        TagEntity tagEntity = (TagEntity) o;
+        final var tagEntity = (TagEntity) o;
         return Objects.equals(getId(), tagEntity.getId());
     }
 
