@@ -1,6 +1,5 @@
 /.idea/
 /product.iml
 /target/
-/data/
-/src/main/resources/dummy/
 fooda-backend-product.iml
+/lucene/
