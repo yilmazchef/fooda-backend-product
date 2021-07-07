@@ -1,17 +1,16 @@
 package be.fooda.backend.product.view.controller;
 
 import be.fooda.backend.product.model.dto.CreateProductRequest;
+import be.fooda.backend.product.model.dto.ProductResponse;
 import be.fooda.backend.product.model.http.HttpSuccessMassages;
 import be.fooda.backend.product.service.flow.ProductFlow;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -50,6 +49,16 @@ public class ProductController {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(HttpSuccessMassages.PRODUCT_CREATED.getDescription());
+    }
+
+    @GetMapping(GET_ALL_PRODUCTS)
+    public ResponseEntity<List<ProductResponse>> findAllProducts(
+            @RequestParam("pageNo") int pageNo, @RequestParam("pageSize") int pageSize) {
+
+        // START_SELECT_FLOW
+        final var responses = productFlow.findAll(pageNo, pageSize);
+
+        return ResponseEntity.status(HttpStatus.FOUND).body(responses);
     }
 
 

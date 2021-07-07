@@ -4,6 +4,7 @@ import be.fooda.backend.product.dao.ProductRepository;
 import be.fooda.backend.product.model.dto.CreateProductRequest;
 import be.fooda.backend.product.model.dto.ProductResponse;
 import be.fooda.backend.product.model.entity.ProductEntity;
+import be.fooda.backend.product.model.http.HttpFailureMassages;
 import be.fooda.backend.product.service.exception.ResourceNotFoundException;
 import be.fooda.backend.product.service.mapper.ProductMapper;
 import lombok.RequiredArgsConstructor;
@@ -14,8 +15,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
-import java.util.UUID;
 
 @RequiredArgsConstructor
 @Service
@@ -40,7 +39,7 @@ public class ProductFlow {
         // IF(NULL)
         if (Objects.isNull(request)) {
             // THROW_EXCEPTION
-            throw new NullPointerException("There is no request in the body.");
+            throw new NullPointerException(HttpFailureMassages.FAILED_TO_CREATE_PRODUCT.getDescription());
         }
 
         //  IF(PRODUCT_EXISTS)
@@ -50,7 +49,7 @@ public class ProductFlow {
 
         if (exists) {
             // THROW_EXCEPTION
-            throw new ResourceNotFoundException("Product NOT found");
+            throw new ResourceNotFoundException(HttpFailureMassages.PRODUCT_ALREADY_EXIST.getDescription());
         }
 
         // MAP_DTO_TO_ENTITY
@@ -68,25 +67,12 @@ public class ProductFlow {
     public List<ProductResponse> findAll(int pageNo, int pageSize) {
 
         // READ_FROM_DB(PAGE_NO, PAGE_SIZE)
-        Pageable pageable = PageRequest.of(pageNo, pageSize);
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
         Page<ProductEntity> pages = productRepository.findAll(pageable);
 
         // RETURN
         return productMapper.toResponses(pages.toList());
     }
-
-    public List<ProductEntity> findAllByIsActive(boolean active, Pageable paging) {
-        return null;
-    }
-
-    public Page<ProductEntity> search(PageRequest pageRequest, String name) {
-        return null;
-    }
-
-    public Optional<ProductEntity> findById(UUID id) {
-        return Optional.empty();
-    }
-
 
     // FIND_BY_ID
 
