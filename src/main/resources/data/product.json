@@ -1,0 +1,54 @@
+{
+  "id": "3ae06a15-aba7-48df-99fd-1ce9ac772dcf",
+  "isActive": true,
+  "name": "String",
+  "eTrackingId": "String",
+  "createdBy": "String",
+  "lastModifiedBy": "String",
+  "createdAt": "14/07/2021 10:06",
+  "updatedAt": "14/07/2021 10:06",
+  "description": "String",
+  "limitPerOrder": 0,
+  "isFeatured": false,
+  "store":  {
+    "id": "UUID",
+    "name": "String",
+    "storeId": "UUID"
+  },
+  "type": "SIMPLE",
+  "prices": [
+    {
+      "id": "UUID",
+      "title": "Default",
+      "amount": 0.585,
+      "expiryTime": "10:00",
+      "expiryDate": "20/01/2022",
+      "isDefault": true,
+      "currency": "EUR"
+    },
+    {
+      "id": "UUID",
+      "title": "Student",
+      "amount": 0.585,
+      "expiryTime": "10:00",
+      "expiryDate": "20/01/2022",
+      "isDefault": true,
+      "currency": "EUR"
+    }
+  ],
+  "taxes": [
+
+  ],
+  "defaultImage": {
+
+  },
+  "categories": [
+
+  ],
+  "tags": [
+
+  ],
+  "ingredients": [
+
+  ]
+}

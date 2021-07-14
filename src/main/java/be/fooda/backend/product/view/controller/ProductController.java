@@ -14,11 +14,14 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/product-api")
+@RequestMapping("/api/v1/products") // https://www.fooda.be/api/v1/products
 public class ProductController {
 
     private static final int PAGE_SIZE_PER_RESULT = 25;
     private static final int DEFAULT_PAGE_NO = 0;
+
+    private static final String PAGE_NUMBER = "pageNo";
+    private static final String PAGE_SIZE = "pageSize";
 
     private static final String GET_ALL_PRODUCTS = "get_all_products";
     private static final String SEARCH_BY_PRODUCT_NAME = "search_by_product_name";
@@ -39,7 +42,7 @@ public class ProductController {
 
     private final ProductFlow productFlow;
 
-    @PostMapping(CREATE_SINGLE_PRODUCT)
+    @PostMapping(CREATE_SINGLE_PRODUCT) // CREATING NEW PRODUCT
     public ResponseEntity<String> createProduct(@RequestBody @Valid CreateProductRequest request) {
 
         // START_CREATE_FLOW
@@ -51,9 +54,15 @@ public class ProductController {
                 .body(HttpSuccessMassages.PRODUCT_CREATED.getDescription());
     }
 
-    @GetMapping(GET_ALL_PRODUCTS)
+    // @PutMapping // UPDATE PRODUCT(S)
+
+    // @DeleteMapping // DELETE PRODUCT(S)
+
+    // @PatchMapping // UPDATE PRODUCT(S) BUT NOT ALL THE FIELDS
+
+    @GetMapping(GET_ALL_PRODUCTS) // READING ALL PRODUCTS
     public ResponseEntity<List<ProductResponse>> findAllProducts(
-            @RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize) {
+            @RequestParam(PAGE_NUMBER) Integer pageNo, @RequestParam(PAGE_SIZE) Integer pageSize) {
 
         // START_SELECT_FLOW
         final var responses = productFlow.findAll(pageNo, pageSize);

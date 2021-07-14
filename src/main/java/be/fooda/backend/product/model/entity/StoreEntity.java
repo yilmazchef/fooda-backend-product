@@ -30,6 +30,9 @@ public class StoreEntity {
     @Column(columnDefinition = "BINARY(16)")
     UUID storeId;
 
+    // BIDIRECTIONAL MAPPING
+    // UNIDIRECTIONAL MAPPING
+
     @OneToOne(cascade = CascadeType.ALL)
     @ToString.Exclude
     ProductEntity product;

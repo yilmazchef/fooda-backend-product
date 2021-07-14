@@ -1,0 +1,9 @@
+{
+  "id": "UUID",
+  "title": "String",
+  "amount": 0.585,
+  "expiryTime": "10:00",
+  "expiryDate": "20/01/2022",
+  "isDefault": true,
+  "currency": "EUR"
+}
