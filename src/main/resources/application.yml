@@ -4,6 +4,7 @@ server:
 spring:
   jpa:
     hibernate:
+      # Hibernate ddl auto (create, create-drop, validate, update)
       ddl-auto: create
     database-platform: org.hibernate.dialect.MySQL8Dialect
     properties:
@@ -17,7 +18,7 @@ spring:
       repositories:
         enabled: true
   datasource:
-    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/productdb
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/productdb?useSSL=false
     username: ${MYSQL_HOST_USERNAME:fooda}
     password: ${MYSQL_HOST_PASSWORD:f00d@}
     driver-class-name: com.mysql.cj.jdbc.Driver

@@ -5,19 +5,25 @@ import lombok.experimental.FieldDefaults;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
 import org.hibernate.validator.constraints.URL;
 import org.springframework.data.jpa.domain.AbstractAuditable;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
 import java.util.UUID;
 
+// LOMBOK
 @Getter
 @Setter
 @ToString(onlyExplicitlyIncluded = true)
 @NoArgsConstructor(force = true, access = AccessLevel.PUBLIC)
 @FieldDefaults(level = AccessLevel.PRIVATE)
+
+// JPA
 @Entity
-public class MediaEntity extends AbstractAuditable<String, UUID> {
+@EntityListeners(AuditingEntityListener.class)
+
+public class MediaEntity extends Auditable<String> {
 
     @NotNull
     UUID eImageId;

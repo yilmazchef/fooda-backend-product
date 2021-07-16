@@ -5,19 +5,25 @@ import lombok.experimental.FieldDefaults;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.GenericField;
 import org.springframework.data.jpa.domain.AbstractAuditable;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Objects;
 import java.util.UUID;
 
+// LOMBOK
 @Getter
 @Setter
 @ToString(onlyExplicitlyIncluded = true)
 @NoArgsConstructor(force = true, access = AccessLevel.PUBLIC)
 @FieldDefaults(level = AccessLevel.PRIVATE)
+
+// JPA
 @Entity
-public class IngredientEntity extends AbstractAuditable<String, UUID> {
+@EntityListeners(AuditingEntityListener.class)
+
+public class IngredientEntity extends Auditable<String> {
 
     @FullTextField
     String ingredientName;

@@ -5,18 +5,24 @@ import lombok.experimental.FieldDefaults;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.*;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.data.jpa.domain.AbstractAuditable;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.util.Objects;
 import java.util.UUID;
 
+// LOMBOK
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor(force = true, access = AccessLevel.PUBLIC)
 @FieldDefaults(level = AccessLevel.PRIVATE)
+
+// JPA
 @Entity
-public class TaxEntity extends AbstractAuditable<String, UUID> {
+@EntityListeners(AuditingEntityListener.class)
+
+public class TaxEntity extends Auditable<String> {
 
     @FullTextField
     String title;
