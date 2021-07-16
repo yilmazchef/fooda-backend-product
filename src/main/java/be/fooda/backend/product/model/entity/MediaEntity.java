@@ -2,8 +2,9 @@ package be.fooda.backend.product.model.entity;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.hibernate.search.mapper.pojo.mapping.definition.annotation.*;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
 import org.hibernate.validator.constraints.URL;
+import org.springframework.data.jpa.domain.AbstractAuditable;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -12,19 +13,13 @@ import java.util.UUID;
 
 @Getter
 @Setter
-@ToString
+@ToString(onlyExplicitlyIncluded = true)
 @NoArgsConstructor(force = true, access = AccessLevel.PUBLIC)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
-public class MediaEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(columnDefinition = "BINARY(16)")
-    UUID id;
+public class MediaEntity extends AbstractAuditable<String, UUID> {
 
     @NotNull
-    @Column(columnDefinition = "BINARY(16)")
     UUID eImageId;
 
     @FullTextField
@@ -33,8 +28,8 @@ public class MediaEntity {
 
     Boolean isDefault;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @ToString.Exclude
+    @JoinColumn
+    @OneToOne(cascade = {CascadeType.ALL})
     ProductEntity product;
 
     @Override

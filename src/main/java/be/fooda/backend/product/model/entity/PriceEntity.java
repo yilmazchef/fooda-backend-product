@@ -2,9 +2,14 @@ package be.fooda.backend.product.model.entity;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.hibernate.search.mapper.pojo.mapping.definition.annotation.*;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.GenericField;
+import org.springframework.data.jpa.domain.AbstractAuditable;
 
 import javax.persistence.*;
+import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.PositiveOrZero;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -13,42 +18,45 @@ import java.util.UUID;
 
 @Getter
 @Setter
-@ToString
+@ToString(onlyExplicitlyIncluded = true)
 @NoArgsConstructor(force = true, access = AccessLevel.PUBLIC)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
-public class PriceEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(columnDefinition = "BINARY(16)")
-    UUID id;
+public class PriceEntity extends AbstractAuditable<String, UUID> {
 
     @FullTextField
     String title;
 
     @GenericField
+    @PositiveOrZero
     BigDecimal amount;
 
     @GenericField
     LocalTime expiryTime;
 
     @GenericField
+    @FutureOrPresent
     LocalDate expiryDate;
 
+    @ColumnDefault(value = "FALSE")
     Boolean isDefault;
 
     @FullTextField
+    @ColumnDefault(value = "EUR")
     String currency; // EURO, €, EUR -> EUR
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @ToString.Exclude
+    @JoinColumn
+    @ManyToOne(cascade = {CascadeType.PERSIST})
     ProductEntity product;
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof PriceEntity)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof PriceEntity)) {
+            return false;
+        }
         PriceEntity that = (PriceEntity) o;
         return Objects.equals(getId(), that.getId());
     }

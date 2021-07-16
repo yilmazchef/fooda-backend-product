@@ -10,7 +10,7 @@
   "description": "String",
   "limitPerOrder": 0,
   "isFeatured": false,
-  "store":  {
+  "store": {
     "id": "UUID",
     "name": "String",
     "storeId": "UUID"
@@ -37,18 +37,40 @@
     }
   ],
   "taxes": [
-
+    {
+      "isDefault": true,
+      "percentage": 0,
+      "title": "string1"
+    },
+    {
+      "isDefault": false,
+      "percentage": 0,
+      "title": "string2"
+    }
   ],
   "defaultImage": {
-
+    "imageId": "myImage.jpg",
+    "isDefault": true,
+    "url": "string"
   },
   "categories": [
-
   ],
   "tags": [
-
+    {
+      "value": "string1"
+    },
+    {
+      "value": "string2"
+    }
   ],
   "ingredients": [
-
+    {
+      "name": "string1",
+      "price": 0
+    },
+    {
+      "name": "string2",
+      "price": 0
+    }
   ]
 }

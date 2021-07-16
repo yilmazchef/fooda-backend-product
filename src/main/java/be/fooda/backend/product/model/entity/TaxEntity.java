@@ -4,6 +4,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.*;
 import org.hibernate.validator.constraints.Range;
+import org.springframework.data.jpa.domain.AbstractAuditable;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -15,12 +16,7 @@ import java.util.UUID;
 @NoArgsConstructor(force = true, access = AccessLevel.PUBLIC)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
-public class TaxEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(columnDefinition = "BINARY(16)")
-    UUID id;
+public class TaxEntity extends AbstractAuditable<String, UUID> {
 
     @FullTextField
     String title;

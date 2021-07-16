@@ -33,7 +33,8 @@ public enum HttpFailureMassages {
     INGREDIENT_DOES_NOT_EXIST("ingredient does not exist"),
     INGREDIENT_COULD_NOT_BE_DELETED("ingredient can not be deleted"),
     TAG_DOES_NOT_EXIST("tag does not exist"),
-    NO_PRODUCT_PRICE_IS_FOUND("no price is found for this product"), TAX_DOES_NOT_EXIST("");
+    NO_PRODUCT_PRICE_IS_FOUND("no price is found for this product"), TAX_DOES_NOT_EXIST(""),
+    FAILED_TO_UPDATE_PRODUCT("There has been a problem while updating the PRODUCT");
 
     private final String description;
 }

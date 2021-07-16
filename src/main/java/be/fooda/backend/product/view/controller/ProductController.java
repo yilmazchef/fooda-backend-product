@@ -2,6 +2,7 @@ package be.fooda.backend.product.view.controller;
 
 import be.fooda.backend.product.model.dto.CreateProductRequest;
 import be.fooda.backend.product.model.dto.ProductResponse;
+import be.fooda.backend.product.model.dto.UpdateProductRequest;
 import be.fooda.backend.product.model.http.HttpSuccessMassages;
 import be.fooda.backend.product.service.flow.ProductFlow;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +11,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @RestController
@@ -21,31 +25,32 @@ public class ProductController {
     private static final int DEFAULT_PAGE_NO = 0;
 
     private static final String PAGE_NUMBER = "pageNo";
+    private static final Integer PAGE_NUMBER_DEFAULT_VALUE = 1;
     private static final String PAGE_SIZE = "pageSize";
+    private static final Integer PAGE_SIZE_DEFAULT_VALUE = 50;
 
-    private static final String GET_ALL_PRODUCTS = "get_all_products";
-    private static final String SEARCH_BY_PRODUCT_NAME = "search_by_product_name";
-    private static final String SEARCH_BY_DESCRIPTION = "search_by_description";
-    private static final String SEARCH_BY_INGREDIENTS = "search_by_ingredients";
-    private static final String SEARCH_BY_CATEGORIES = "search_by_categories";
-    private static final String SEARCH_BY_TAGS = "search_by_tags";
-    private static final String FILTER_BY_PRICE_RANGE = "filter_by_price_range";
-    private static final String SEARCH_BY_STORE_NAME = "search_by_store_name";
-    private static final String FILTER_BY_FEATURED = "filter_by_featured";
-    private static final String CREATE_SINGLE_PRODUCT = "create_single_product";
-    private static final String CREATE_LIST_OF_PRODUCTS = "create_list_of_products";
-    private static final String GET_BY_PRODUCT_ID = "get_by_product_id";
-    private static final String COMBINED_SEARCH = "combined_search";
-    private static final String EXISTS_BY_PRODUCT_ID = "exists_by_product_id";
-    private static final String UPDATE_PRODUCT_INFO = "update_product_info";
-    private static final String DELETE_PRODUCT_BY_ID = "delete_product_by_id";
+    private static final String GET_ALL = "get/all";
+    private static final String GET_SEARCH = "search";
+    private static final String GET_FILTER = "filter";
+    private static final String POST_SINGLE = "add/one";
+    private static final String POST_ALL = "add/all";
+    private static final String GET_BY_ID = "get/one";
+    private static final String GET_EXISTS_BY_ID = "exists/one";
+    private static final String PUT_SINGLE = "edit/one";
+    private static final String PUT_ALL = "edit/all";
+    private static final String DELETE_BY_ID = "delete/one";
+    private static final String DELETE_BY_ID_PERMANENTLY = "delete/one/permanent";
 
+    // INJECT_FLOW_BEAN
     private final ProductFlow productFlow;
 
-    @PostMapping(CREATE_SINGLE_PRODUCT) // CREATING NEW PRODUCT
+    // RESPONSE_ENTITY = STATUS, HEADERS, BODY
+
+    // CREATING_NEW_PRODUCT
+    @PostMapping(POST_SINGLE)
     public ResponseEntity<String> createProduct(@RequestBody @Valid CreateProductRequest request) {
 
-        // START_CREATE_FLOW
+        // CREATE_FLOW
         productFlow.createProduct(request);
 
         // RETURN_SUCCESS
@@ -54,22 +59,89 @@ public class ProductController {
                 .body(HttpSuccessMassages.PRODUCT_CREATED.getDescription());
     }
 
-    // @PutMapping // UPDATE PRODUCT(S)
+    // UPDATE_SINGLE_PRODUCT
+    @PutMapping(PUT_SINGLE)
+    public ResponseEntity<String> updateProduct(@RequestParam("productId") UUID id, @RequestBody @Valid UpdateProductRequest request) {
 
-    // @DeleteMapping // DELETE PRODUCT(S)
+        // UPDATE_FLOW
+        productFlow.updateProduct(id, request);
+
+        // RETURN_SUCCESS
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(HttpSuccessMassages.PRODUCT_UPDATED.getDescription());
+    }
+
+    // DELETE_BY_ID
+    @DeleteMapping(DELETE_BY_ID)
+    public ResponseEntity<String> deleteById(@RequestParam("productId") UUID id) {
+
+
+
+        // RETURN_SUCCESS
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(HttpSuccessMassages.PRODUCT_DELETED.getDescription());
+    }
+
+    // DELETE_BY_ID_PERMANENTLY
+    @DeleteMapping(DELETE_BY_ID_PERMANENTLY)
+    public ResponseEntity<String> deleteByIdPermanently(@RequestParam("productId") UUID id) {
+
+
+        // RETURN_SUCCESS
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(HttpSuccessMassages.PRODUCT_DELETED.getDescription());
+    }
 
     // @PatchMapping // UPDATE PRODUCT(S) BUT NOT ALL THE FIELDS
 
-    @GetMapping(GET_ALL_PRODUCTS) // READING ALL PRODUCTS
+
+    // GET_ALL
+    @GetMapping(GET_ALL)
     public ResponseEntity<List<ProductResponse>> findAllProducts(
-            @RequestParam(PAGE_NUMBER) Integer pageNo, @RequestParam(PAGE_SIZE) Integer pageSize) {
+            @RequestParam(value = PAGE_NUMBER, required = false) Integer pageNo,
+            @RequestParam(value = PAGE_SIZE, required = false) Integer pageSize) {
+
+        // SET DEFAULT VALUES ..
+        pageNo = PAGE_NUMBER_DEFAULT_VALUE;
+        pageSize = PAGE_SIZE_DEFAULT_VALUE;
 
         // START_SELECT_FLOW
-        final var responses = productFlow.findAll(pageNo, pageSize);
+        final List<ProductResponse> responses = productFlow.findAll(pageNo, pageSize);
 
         // RETURN_ALL_PRODUCTS_IN_PAGES
         return ResponseEntity.status(HttpStatus.FOUND).body(responses);
     }
 
+    // GET_BY_ID
+    @GetMapping(GET_BY_ID)
+    public ResponseEntity<ProductResponse> findProductById(@RequestParam("productId") UUID id) {
+
+        // RETURN_SUCCESS
+        return ResponseEntity.status(HttpStatus.FOUND).body(new ProductResponse());
+    }
+
+    // SEARCH(KEYWORDS)
+    @GetMapping(GET_SEARCH)
+    public ResponseEntity<List<ProductResponse>> search(@RequestParam Map<String, String> keywords) {
+
+        // RETURN_SUCCESS
+        return ResponseEntity.status(HttpStatus.FOUND).body(Collections.EMPTY_LIST);
+    }
+
+    // EXISTS_BY_ID
+    @GetMapping
+    public ResponseEntity<String> existsById(@RequestParam("productId") UUID id) {
+
+
+        // RETURN_SUCCESS
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(HttpSuccessMassages.PRODUCT_EXISTS.getDescription());
+    }
+
+    // @GetMapping // EXISTS_BY_UNIQUE_FIELDS
+    public ResponseEntity<String> existsByUniqueFields(@RequestParam("name") String name, @RequestParam("storeId") UUID storeId) {
+
+
+        // RETURN_SUCCESS
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(HttpSuccessMassages.PRODUCT_EXISTS.getDescription());
+    }
 
 }

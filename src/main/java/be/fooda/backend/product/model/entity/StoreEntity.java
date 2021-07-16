@@ -4,6 +4,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.*;
 import org.hibernate.validator.constraints.Length;
+import org.springframework.data.jpa.domain.AbstractAuditable;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -15,23 +16,14 @@ import java.util.UUID;
 @NoArgsConstructor(force = true, access = AccessLevel.PUBLIC)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
-public class StoreEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(columnDefinition = "BINARY(16)")
-    UUID id;
+public class StoreEntity extends AbstractAuditable<String, UUID> {
 
     @FullTextField
     @Length(min = 2)
     String name;
 
     @KeywordField
-    @Column(columnDefinition = "BINARY(16)")
     UUID storeId;
-
-    // BIDIRECTIONAL MAPPING
-    // UNIDIRECTIONAL MAPPING
 
     @OneToOne(cascade = CascadeType.ALL)
     @ToString.Exclude

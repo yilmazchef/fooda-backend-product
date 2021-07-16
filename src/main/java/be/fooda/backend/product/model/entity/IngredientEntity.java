@@ -2,7 +2,9 @@ package be.fooda.backend.product.model.entity;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.hibernate.search.mapper.pojo.mapping.definition.annotation.*;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.GenericField;
+import org.springframework.data.jpa.domain.AbstractAuditable;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -11,16 +13,11 @@ import java.util.UUID;
 
 @Getter
 @Setter
-@ToString
+@ToString(onlyExplicitlyIncluded = true)
 @NoArgsConstructor(force = true, access = AccessLevel.PUBLIC)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
-public class IngredientEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(columnDefinition = "BINARY(16)")
-    UUID id;
+public class IngredientEntity extends AbstractAuditable<String, UUID> {
 
     @FullTextField
     String ingredientName;
@@ -28,8 +25,8 @@ public class IngredientEntity {
     @GenericField
     BigDecimal price = BigDecimal.valueOf(0.0);
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @ToString.Exclude
+    @JoinColumn
+    @ManyToOne(cascade = {CascadeType.PERSIST})
     ProductEntity product;
 
     @Override

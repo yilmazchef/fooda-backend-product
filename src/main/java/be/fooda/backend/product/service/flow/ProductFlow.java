@@ -3,6 +3,7 @@ package be.fooda.backend.product.service.flow;
 import be.fooda.backend.product.dao.ProductRepository;
 import be.fooda.backend.product.model.dto.CreateProductRequest;
 import be.fooda.backend.product.model.dto.ProductResponse;
+import be.fooda.backend.product.model.dto.UpdateProductRequest;
 import be.fooda.backend.product.model.entity.ProductEntity;
 import be.fooda.backend.product.model.http.HttpFailureMassages;
 import be.fooda.backend.product.service.exception.ResourceNotFoundException;
@@ -15,6 +16,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @Service
@@ -61,7 +64,30 @@ public class ProductFlow {
     }
 
     // UPDATE_PRODUCT(UNIQUE_IDENTIFIER, REQUEST)
+    public void updateProduct(UUID id, UpdateProductRequest request) {
 
+        // IF(NULL)
+        if (Objects.isNull(request)) {
+            // THROW_EXCEPTION
+            throw new NullPointerException(HttpFailureMassages.FAILED_TO_UPDATE_PRODUCT.getDescription());
+        }
+
+        Optional<ProductEntity> oEntity = productRepository.findById(id);
+
+        //  IF(PRODUCT_NOT_EXIST)
+        if (oEntity.isEmpty()) {
+            // THROW_EXCEPTION
+            throw new ResourceNotFoundException(HttpFailureMassages.PRODUCT_NOT_FOUND.getDescription());
+        }
+
+        // MAP_FROM_REQUEST_TO_ENTITY
+        ProductEntity entity = oEntity.get();
+        ProductEntity entityToUpdate = productMapper.toEntity(request, entity);
+
+        // UPDATE_FROM_DB
+        productRepository.save(entityToUpdate);
+
+    }
 
     // FIND_ALL(PAGE_NO, PAGE_SIZE)
     public List<ProductResponse> findAll(int pageNo, int pageSize) {

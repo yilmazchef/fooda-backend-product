@@ -7,6 +7,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.*;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.jpa.domain.AbstractAuditable;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -16,19 +17,19 @@ import java.util.Objects;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+// LOMBOK
 @Getter
 @Setter
-@ToString
+@ToString(onlyExplicitlyIncluded = true)
 @NoArgsConstructor(force = true, access = AccessLevel.PUBLIC)
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Entity
-@Indexed
-public class ProductEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(columnDefinition = "BINARY(16)")
-    UUID id;
+// JPA
+@Entity
+
+// HIBERNATE SEARCH
+@Indexed
+public class ProductEntity extends AbstractAuditable<String, UUID> {
 
     Boolean isActive = Boolean.TRUE;
 
@@ -37,18 +38,6 @@ public class ProductEntity {
 
     @KeywordField
     String eTrackingId;
-
-    @CreatedBy
-    String createdBy;
-
-    @LastModifiedBy
-    String lastModifiedBy;
-
-    @CreationTimestamp
-    LocalDateTime createdAt;
-
-    @UpdateTimestamp
-    LocalDateTime updatedAt;
 
     @Lob
     @FullTextField
@@ -73,7 +62,7 @@ public class ProductEntity {
     }
 
     @FullTextField
-    @Enumerated(value = EnumType.STRING)
+    @Enumerated(EnumType.STRING)
     TypeEntity type;
 
     @OneToMany(
@@ -81,7 +70,6 @@ public class ProductEntity {
             orphanRemoval = true,
             cascade = CascadeType.ALL
     )
-    @ToString.Exclude
     @IndexedEmbedded
     @AssociationInverseSide(inversePath = @ObjectPath(@PropertyValue(propertyName = "product")))
     List<PriceEntity> prices = new ArrayList<>();
@@ -115,7 +103,6 @@ public class ProductEntity {
             cascade = CascadeType.ALL
     )
     @IndexedEmbedded
-    @ToString.Exclude
     @AssociationInverseSide(inversePath = @ObjectPath(@PropertyValue(propertyName = "product")))
     List<TaxEntity> taxes = new ArrayList<>();
 
@@ -151,7 +138,6 @@ public class ProductEntity {
     }
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-    @ToString.Exclude
     @IndexedEmbedded
     @AssociationInverseSide(inversePath = @ObjectPath(@PropertyValue(propertyName = "product")))
     List<CategoryEntity> categories = new ArrayList<>();
@@ -179,7 +165,6 @@ public class ProductEntity {
     }
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-    @ToString.Exclude
     @IndexedEmbedded
     @AssociationInverseSide(inversePath = @ObjectPath(@PropertyValue(propertyName = "product")))
     List<TagEntity> tags = new ArrayList<>();
@@ -208,7 +193,6 @@ public class ProductEntity {
     }
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-    @ToString.Exclude
     @IndexedEmbedded
     @AssociationInverseSide(inversePath = @ObjectPath(@PropertyValue(propertyName = "product")))
     List<IngredientEntity> ingredients = new ArrayList<>();

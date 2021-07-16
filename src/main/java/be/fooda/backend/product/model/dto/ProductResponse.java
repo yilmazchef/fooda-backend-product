@@ -22,10 +22,6 @@ public class ProductResponse {
     Boolean isActive;
     String name;
     String eTrackingId;
-    String createdBy;
-    String lastModifiedBy;
-    LocalDateTime createdAt;
-    LocalDateTime updatedAt;
     String description;
     Integer limitPerOrder;
     Boolean isFeatured;
