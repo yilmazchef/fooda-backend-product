@@ -11,10 +11,8 @@ import java.util.Objects;
 import java.util.UUID;
 
 // LOMBOK
-@Table(name = "StoreEntity")
 @Getter
 @Setter
-@ToString(onlyExplicitlyIncluded = true)
 @NoArgsConstructor(force = true, access = AccessLevel.PUBLIC)
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -24,33 +22,40 @@ import java.util.UUID;
 
 public class StoreEntity {
 
-    @Column(nullable = false, updatable = false)
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    UUID id;
-
+    @KeywordField
+    UUID storeId;
 
     @FullTextField
     @Length(min = 2)
     String name;
 
-    @KeywordField
-    UUID storeId;
-
-    @JoinColumn
-    @OneToOne(cascade = {CascadeType.ALL})
+    @OneToOne
     ProductEntity product;
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof StoreEntity)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof StoreEntity)) {
+            return false;
+        }
         StoreEntity that = (StoreEntity) o;
-        return Objects.equals(getId(), that.getId());
+        return Objects.equals(getStoreId(), that.getStoreId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId());
+        return Objects.hash(getStoreId());
+    }
+
+    @Override
+    public String toString() {
+        return "{\"StoreEntity\":{"
+                + "                        \"storeId\":" + storeId
+                + ",                         \"name\":\"" + name + "\""
+                + ",                         \"product\":" + product.getProductId()
+                + "}}";
     }
 }

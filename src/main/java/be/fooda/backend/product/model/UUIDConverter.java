@@ -10,7 +10,6 @@ public class UUIDConverter implements AttributeConverter<UUID, UUID> {
     public UUID convertToDatabaseColumn(UUID attribute) {
         return attribute;
     }
-
     @Override
     public UUID convertToEntityAttribute(UUID dbData) {
         return dbData;

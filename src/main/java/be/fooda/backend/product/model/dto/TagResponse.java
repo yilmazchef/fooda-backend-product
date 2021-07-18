@@ -14,7 +14,7 @@ import java.util.UUID;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class TagResponse {
 
-    UUID id;
+    UUID tagId;
     String value;
 
 }

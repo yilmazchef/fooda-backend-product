@@ -2,7 +2,6 @@ package be.fooda.backend.product.model.entity;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.GenericField;
 
@@ -10,16 +9,13 @@ import javax.persistence.*;
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.PositiveOrZero;
 import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
 // LOMBOK
-@Table(name = "PriceEntity")
 @Getter
 @Setter
-@ToString(onlyExplicitlyIncluded = true)
 @NoArgsConstructor(force = true, access = AccessLevel.PUBLIC)
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -29,35 +25,27 @@ import java.util.UUID;
 
 public class PriceEntity {
 
-    @Column(nullable = false, updatable = false)
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    UUID id;
-
+    UUID priceId;
 
     @FullTextField
     String title;
 
     @GenericField
     @PositiveOrZero
-    BigDecimal amount;
-
-    @GenericField
-    LocalTime expiryTime;
+    BigDecimal amount = BigDecimal.ZERO;
 
     @GenericField
     @FutureOrPresent
-    LocalDate expiryDate;
+    LocalDateTime expiresAt;
 
-    @ColumnDefault(value = "FALSE")
-    Boolean isDefault;
+    Boolean isDefault = Boolean.FALSE;
 
     @FullTextField
-    @ColumnDefault(value = "EUR")
-    String currency; // EURO, €, EUR -> EUR
+    String currency = "EUR"; // EURO, €, EUR -> EUR
 
-    @JoinColumn
-    @ManyToOne(cascade = {CascadeType.PERSIST})
+    @ManyToOne(fetch = FetchType.LAZY)
     ProductEntity product;
 
     @Override
@@ -69,11 +57,24 @@ public class PriceEntity {
             return false;
         }
         PriceEntity that = (PriceEntity) o;
-        return Objects.equals(getId(), that.getId());
+        return Objects.equals(getPriceId(), that.getPriceId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId());
+        return Objects.hash(getPriceId());
+    }
+
+    @Override
+    public String toString() {
+        return "{\"PriceEntity\":{"
+                + "                        \"priceId\":" + priceId
+                + ",                         \"title\":\"" + title + "\""
+                + ",                         \"amount\":\"" + amount + "\""
+                + ",                         \"expiresAt\":" + expiresAt
+                + ",                         \"isDefault\":\"" + isDefault + "\""
+                + ",                         \"currency\":\"" + currency + "\""
+                + ",                         \"product\":" + product.getProductId()
+                + "}}";
     }
 }

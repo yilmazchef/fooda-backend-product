@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.UUID;
 
@@ -18,11 +19,10 @@ import java.util.UUID;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class PriceResponse {
 
-    UUID id;
+    UUID priceId;
     String title;
     BigDecimal amount;
-    LocalTime expiryTime;
-    LocalDate expiryDate;
+    LocalDateTime expiresAt;
     Boolean isDefault;
     String currency; // EURO, €, EUR -> EUR
 }

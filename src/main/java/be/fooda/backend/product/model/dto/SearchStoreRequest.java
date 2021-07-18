@@ -14,9 +14,5 @@ import java.util.UUID;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class SearchStoreRequest {
 
-    UUID id;
     String name;
-    UUID eStoreId;
-    SearchProductRequest product;
-
 }

@@ -6,6 +6,7 @@ import lombok.extern.jackson.Jacksonized;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Jacksonized
 @Getter
@@ -22,12 +23,66 @@ public class UpdateProductRequest {
     Boolean isFeatured;
     UpdateStoreRequest store;
     UpdateTypeRequest type;
-    List<UpdatePriceRequest> prices = new ArrayList<>();
-    List<UpdateTaxRequest> taxes = new ArrayList<>();
+    
+    Set<UpdatePriceRequest> prices = new LinkedHashSet<>();
+
+    public void addPrice(UpdatePriceRequest price) {
+        this.prices.add(price);
+    }
+
+    public void removePrice(UpdatePriceRequest price) {
+        this.prices.remove(price);
+    }
+
+    List<UpdateTaxRequest> taxes = new LinkedHashSet<>();
+
+    public void addTax(UpdateTaxRequest tax) {
+        tax.setProduct(this);
+        this.taxes.add(tax);
+    }
+
+    public void removeTax(UpdateTaxRequest tax) {
+        tax.setProduct(this);
+        this.taxes.remove(tax);
+    }
+
     UpdateMediaRequest defaultImage;
-    List<UpdateCategoryRequest> categories = new ArrayList<>();
-    List<UpdateTagRequest> tags = new ArrayList<>();
-    List<UpdateIngredientRequest> ingredients = new ArrayList<>();
+
+    public void setDefaultImage(UpdateMediaRequest defaultImage) {
+        this.defaultImage = defaultImage;
+    }
+
+    List<UpdateCategoryRequest> categories = new LinkedHashSet<>();
+
+    public void addCategory(UpdateCategoryRequest category) {
+        this.categories.add(category);
+    }
+
+    public void removeCategory(UpdateCategoryRequest category) {
+        this.categories.remove(category);
+    }
+
+    List<UpdateTagRequest> tags = new LinkedHashSet<>();
+
+    public void addTag(UpdateTagRequest tag) {
+        tag.setProduct(this);
+        this.tags.add(tag);
+    }
+
+    public void removeTag(UpdateTagRequest tag) {
+        tag.setProduct(this);
+        this.tags.remove(tag);
+    }
+
+    List<UpdateIngredientRequest> ingredients = new LinkedHashSet<>();
+
+    public void addIngredient(UpdateIngredientRequest ingredient) {
+        this.ingredients.add(ingredient);
+    }
+
+    public void removeIngredient(UpdateIngredientRequest ingredient) {
+        this.ingredients.add(ingredient);
+    }
 
 }
 

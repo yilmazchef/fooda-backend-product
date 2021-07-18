@@ -11,10 +11,8 @@ import java.util.Objects;
 import java.util.UUID;
 
 // LOMBOK
-@Table(name = "TaxEntity")
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor(force = true, access = AccessLevel.PUBLIC)
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -24,11 +22,9 @@ import java.util.UUID;
 
 public class TaxEntity {
 
-    @Column(nullable = false, updatable = false)
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    UUID id;
-
+    UUID taxId;
 
     @Column(nullable = false, unique = true)
     @FullTextField
@@ -36,24 +32,38 @@ public class TaxEntity {
 
     @GenericField
     @Range(min = 0, max = 100)
-    Double percentage;
+    Double percentage = 0.00;
 
-    Boolean isDefault;
+    Boolean isDefault = Boolean.FALSE;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @ToString.Exclude
+    @ManyToOne(fetch = FetchType.LAZY)
     ProductEntity product;
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof TaxEntity)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof TaxEntity)) {
+            return false;
+        }
         final var taxEntity = (TaxEntity) o;
-        return Objects.equals(getId(), taxEntity.getId());
+        return Objects.equals(getTaxId(), taxEntity.getTaxId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId());
+        return Objects.hash(getTaxId());
+    }
+
+    @Override
+    public String toString() {
+        return "{\"TaxEntity\":{"
+                + "                        \"taxId\":" + taxId
+                + ",                         \"title\":\"" + title + "\""
+                + ",                         \"percentage\":\"" + percentage + "\""
+                + ",                         \"isDefault\":\"" + isDefault + "\""
+                + ",                         \"product\":" + product.getProductId()
+                + "}}";
     }
 }

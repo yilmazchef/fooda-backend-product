@@ -6,6 +6,7 @@ import lombok.extern.jackson.Jacksonized;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Jacksonized
@@ -18,8 +19,7 @@ public class UpdatePriceRequest {
 
     String title;
     BigDecimal amount;
-    LocalTime expiryTime;
-    LocalDate expiryDate;
+    LocalDateTime expiresAt;
     Boolean isDefault;
     String currency;
 

@@ -14,8 +14,7 @@ import java.util.UUID;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class MediaResponse {
 
-    UUID id;
-    UUID eImageId;
+    UUID mediaId;
     String url;
     Boolean isDefault;
 

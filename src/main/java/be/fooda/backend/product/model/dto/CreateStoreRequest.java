@@ -15,8 +15,8 @@ import java.util.UUID;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CreateStoreRequest {
 
-    String name;
     UUID storeId;
+    String name;
 
     @Override
     public boolean equals(Object o) {

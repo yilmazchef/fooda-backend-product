@@ -14,8 +14,7 @@ import java.util.UUID;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class StoreResponse {
 
-    UUID id;
-    String name;
     UUID storeId;
+    String name;
 
 }

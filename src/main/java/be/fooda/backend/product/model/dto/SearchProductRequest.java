@@ -7,6 +7,7 @@ import lombok.extern.jackson.Jacksonized;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -18,43 +19,26 @@ import java.util.stream.Collectors;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class SearchProductRequest {
 
-    UUID id;
     Boolean isActive;
     String name;
     String eTrackingId;
-    String createdBy;
-    String lastModifiedBy;
-    LocalDateTime createdAt;
-    LocalDateTime updatedAt;
     String description;
     Integer limitPerOrder;
     Boolean isFeatured;
     SearchStoreRequest store;
     SearchTypeRequest type;
-    List<SearchPriceRequest> prices = new ArrayList<>();
 
-    public void setPrices(List<SearchPriceRequest> prices) {
-        this.prices = prices
-                .stream()
-                .map(this::setOnePrice)
-                .collect(Collectors.toList());
-    }
+    Set<SearchPriceRequest> prices = new LinkedHashSet<>();
 
     public void addPrice(SearchPriceRequest price) {
-        if (!this.prices.contains(price)) {
-            this.prices.add(price);
-        }
+        this.prices.add(price);
     }
 
     public void removePrice(SearchPriceRequest price) {
         this.prices.remove(price);
     }
 
-    SearchPriceRequest setOnePrice(SearchPriceRequest price) {
-        return price;
-    }
-
-    List<SearchTaxRequest> taxes = new ArrayList<>();
+    List<SearchTaxRequest> taxes = new LinkedHashSet<>();
 
     public void addTax(SearchTaxRequest tax) {
         tax.setProduct(this);
@@ -66,24 +50,13 @@ public class SearchProductRequest {
         this.taxes.remove(tax);
     }
 
-    public void setTaxes(List<SearchTaxRequest> taxes) {
-        this.taxes = taxes.stream()
-                .map(this::setOneTax)
-                .collect(Collectors.toList());
-    }
-
-    SearchTaxRequest setOneTax(SearchTaxRequest tax) {
-        tax.setProduct(this);
-        return tax;
-    }
-
     SearchMediaRequest defaultImage;
 
     public void setDefaultImage(SearchMediaRequest defaultImage) {
         this.defaultImage = defaultImage;
     }
 
-    List<SearchCategoryRequest> categories = new ArrayList<>();
+    List<SearchCategoryRequest> categories = new LinkedHashSet<>();
 
     public void addCategory(SearchCategoryRequest category) {
         this.categories.add(category);
@@ -93,18 +66,7 @@ public class SearchProductRequest {
         this.categories.remove(category);
     }
 
-    public void setCategories(List<SearchCategoryRequest> categories) {
-        this.categories = categories
-                .stream()
-                .map(this::setOneCategory)
-                .collect(Collectors.toList());
-    }
-
-    SearchCategoryRequest setOneCategory(SearchCategoryRequest category) {
-        return category;
-    }
-
-    List<SearchTagRequest> tags = new ArrayList<>();
+    List<SearchTagRequest> tags = new LinkedHashSet<>();
 
     public void addTag(SearchTagRequest tag) {
         tag.setProduct(this);
@@ -116,20 +78,7 @@ public class SearchProductRequest {
         this.tags.remove(tag);
     }
 
-    public void setTags(List<SearchTagRequest> tags) {
-        this.tags = tags
-                .stream()
-                .map(this::setOneTag)
-                .collect(Collectors.toList());
-
-    }
-
-    SearchTagRequest setOneTag(SearchTagRequest tag) {
-        tag.setProduct(this);
-        return tag;
-    }
-
-    List<SearchIngredientRequest> ingredients = new ArrayList<>();
+    List<SearchIngredientRequest> ingredients = new LinkedHashSet<>();
 
     public void addIngredient(SearchIngredientRequest ingredient) {
         this.ingredients.add(ingredient);
@@ -137,16 +86,6 @@ public class SearchProductRequest {
 
     public void removeIngredient(SearchIngredientRequest ingredient) {
         this.ingredients.add(ingredient);
-    }
-
-    public void setIngredients(List<SearchIngredientRequest> ingredients) {
-        this.ingredients = ingredients.stream()
-                .map(this::setOneIngredient)
-                .collect(Collectors.toList());
-    }
-
-    SearchIngredientRequest setOneIngredient(SearchIngredientRequest ingredient) {
-        return ingredient;
     }
 
 }

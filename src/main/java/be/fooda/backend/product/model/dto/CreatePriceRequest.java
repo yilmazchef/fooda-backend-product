@@ -14,6 +14,7 @@ import java.math.BigDecimal;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CreatePriceRequest {
 
+    String title;
     BigDecimal amount;
 
 }

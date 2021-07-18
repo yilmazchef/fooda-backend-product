@@ -5,17 +5,12 @@ import lombok.experimental.FieldDefaults;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 // LOMBOK
-@Table(name = "ProductEntity")
 @Getter
 @Setter
-@ToString(onlyExplicitlyIncluded = true)
 @NoArgsConstructor(force = true, access = AccessLevel.PUBLIC)
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -28,10 +23,10 @@ import java.util.stream.Collectors;
 
 public class ProductEntity {
 
-    @Column(nullable = false, updatable = false)
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    UUID id;
+    @KeywordField
+    UUID productId;
 
     Boolean isActive = Boolean.TRUE;
 
@@ -46,16 +41,12 @@ public class ProductEntity {
     String description;
 
     @GenericField
-    Integer limitPerOrder;
+    Integer limitPerOrder = 0;
 
-    Boolean isFeatured;
+    Boolean isFeatured = Boolean.FALSE;
 
     @IndexedEmbedded
-    @OneToOne(
-            mappedBy = "product",
-            orphanRemoval = true,
-            cascade = CascadeType.ALL)
-    @AssociationInverseSide(inversePath = @ObjectPath(@PropertyValue(propertyName = "product")))
+    @OneToOne(mappedBy = "product")
     StoreEntity store;
 
     public void setStore(StoreEntity store) {
@@ -67,27 +58,24 @@ public class ProductEntity {
     @Enumerated(EnumType.STRING)
     TypeEntity type;
 
+    @IndexedEmbedded
     @OneToMany(
             mappedBy = "product",
-            orphanRemoval = true,
-            cascade = CascadeType.ALL
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
     )
-    @IndexedEmbedded
-    @AssociationInverseSide(inversePath = @ObjectPath(@PropertyValue(propertyName = "product")))
-    List<PriceEntity> prices = new ArrayList<>();
+    Set<PriceEntity> prices = new LinkedHashSet<>();
 
-    public void setPrices(List<PriceEntity> prices) {
+    public void setPrices(Set<PriceEntity> prices) {
         this.prices = prices
                 .stream()
                 .map(this::setOnePrice)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
     public void addPrice(PriceEntity price) {
-        if (!this.prices.contains(price)) {
-            price.setProduct(this);
-            this.prices.add(price);
-        }
+        price.setProduct(this);
+        this.prices.add(price);
     }
 
     public void removePrice(PriceEntity price) {
@@ -100,13 +88,13 @@ public class ProductEntity {
         return price;
     }
 
+    @IndexedEmbedded
     @OneToMany(
             mappedBy = "product",
-            cascade = CascadeType.ALL
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
     )
-    @IndexedEmbedded
-    @AssociationInverseSide(inversePath = @ObjectPath(@PropertyValue(propertyName = "product")))
-    List<TaxEntity> taxes = new ArrayList<>();
+    Set<TaxEntity> taxes = new LinkedHashSet<>();
 
     public void addTax(TaxEntity tax) {
         tax.setProduct(this);
@@ -118,10 +106,10 @@ public class ProductEntity {
         this.taxes.remove(tax);
     }
 
-    public void setTaxes(List<TaxEntity> taxes) {
+    public void setTaxes(Set<TaxEntity> taxes) {
         this.taxes = taxes.stream()
                 .map(this::setOneTax)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
     TaxEntity setOneTax(TaxEntity tax) {
@@ -129,9 +117,8 @@ public class ProductEntity {
         return tax;
     }
 
-    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "product")
     @IndexedEmbedded
-    @AssociationInverseSide(inversePath = @ObjectPath(@PropertyValue(propertyName = "product")))
     MediaEntity defaultImage;
 
     public void setDefaultImage(MediaEntity defaultImage) {
@@ -139,10 +126,13 @@ public class ProductEntity {
         this.defaultImage = defaultImage;
     }
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     @IndexedEmbedded
-    @AssociationInverseSide(inversePath = @ObjectPath(@PropertyValue(propertyName = "product")))
-    List<CategoryEntity> categories = new ArrayList<>();
+    @OneToMany(
+            mappedBy = "product",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    Set<CategoryEntity> categories = new LinkedHashSet<>();
 
     public void addCategory(CategoryEntity category) {
         category.setProduct(this);
@@ -154,11 +144,11 @@ public class ProductEntity {
         this.categories.remove(category);
     }
 
-    public void setCategories(List<CategoryEntity> categories) {
+    public void setCategories(Set<CategoryEntity> categories) {
         this.categories = categories
                 .stream()
                 .map(this::setOneCategory)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
     CategoryEntity setOneCategory(CategoryEntity category) {
@@ -166,10 +156,13 @@ public class ProductEntity {
         return category;
     }
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     @IndexedEmbedded
-    @AssociationInverseSide(inversePath = @ObjectPath(@PropertyValue(propertyName = "product")))
-    List<TagEntity> tags = new ArrayList<>();
+    @OneToMany(
+            mappedBy = "product",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    Set<TagEntity> tags = new LinkedHashSet<>();
 
     public void addTag(TagEntity tag) {
         tag.setProduct(this);
@@ -181,11 +174,11 @@ public class ProductEntity {
         this.tags.remove(tag);
     }
 
-    public void setTags(List<TagEntity> tags) {
+    public void setTags(Set<TagEntity> tags) {
         this.tags = tags
                 .stream()
                 .map(this::setOneTag)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
 
     }
 
@@ -194,10 +187,13 @@ public class ProductEntity {
         return tag;
     }
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     @IndexedEmbedded
-    @AssociationInverseSide(inversePath = @ObjectPath(@PropertyValue(propertyName = "product")))
-    List<IngredientEntity> ingredients = new ArrayList<>();
+    @OneToMany(
+            mappedBy = "product",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    Set<IngredientEntity> ingredients = new LinkedHashSet<>();
 
     public void addIngredient(IngredientEntity ingredient) {
         ingredient.setProduct(this);
@@ -209,10 +205,10 @@ public class ProductEntity {
         this.ingredients.add(ingredient);
     }
 
-    public void setIngredients(List<IngredientEntity> ingredients) {
+    public void setIngredients(Set<IngredientEntity> ingredients) {
         this.ingredients = ingredients.stream()
                 .map(this::setOneIngredient)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
     IngredientEntity setOneIngredient(IngredientEntity ingredient) {
@@ -222,15 +218,40 @@ public class ProductEntity {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof ProductEntity)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof ProductEntity)) {
+            return false;
+        }
         ProductEntity that = (ProductEntity) o;
-        return Objects.equals(getId(), that.getId());
+        return Objects.equals(getProductId(), that.getProductId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId());
+        return Objects.hash(getProductId());
+    }
+
+    @Override
+    public String toString() {
+        return "{\"ProductEntity\":{"
+                + "                        \"productId\":" + productId
+                + ",                         \"isActive\":\"" + isActive + "\""
+                + ",                         \"name\":\"" + name + "\""
+                + ",                         \"eTrackingId\":\"" + eTrackingId + "\""
+                + ",                         \"description\":\"" + description + "\""
+                + ",                         \"limitPerOrder\":\"" + limitPerOrder + "\""
+                + ",                         \"isFeatured\":\"" + isFeatured + "\""
+                + ",                         \"store\":" + store
+                + ",                         \"type\":\"" + type + "\""
+                + ",                         \"prices\":" + prices
+                + ",                         \"taxes\":" + taxes
+                + ",                         \"defaultImage\":" + defaultImage
+                + ",                         \"categories\":" + categories
+                + ",                         \"tags\":" + tags
+                + ",                         \"ingredients\":" + ingredients
+                + "}}";
     }
 }
 

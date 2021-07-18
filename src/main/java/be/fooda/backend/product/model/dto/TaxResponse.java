@@ -14,7 +14,7 @@ import java.util.UUID;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class TaxResponse {
 
-    UUID id;
+    UUID taxId;
     String title;
     Double percentage;
     Boolean isDefault;

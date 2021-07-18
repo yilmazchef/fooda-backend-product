@@ -14,7 +14,7 @@ import java.util.UUID;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class UpdateStoreRequest {
 
-    String name;
     UUID storeId;
+    String name;
 
 }

@@ -11,10 +11,8 @@ import java.util.Objects;
 import java.util.UUID;
 
 // LOMBOK
-@Table(name = "IngredientEntity")
 @Getter
 @Setter
-@ToString(onlyExplicitlyIncluded = true)
 @NoArgsConstructor(force = true, access = AccessLevel.PUBLIC)
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -24,32 +22,43 @@ import java.util.UUID;
 
 public class IngredientEntity {
 
-    @Column(nullable = false, updatable = false)
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    UUID id;
-
+    UUID ingredientId;
 
     @FullTextField
-    String ingredientName;
+    String title;
 
     @GenericField
     BigDecimal price = BigDecimal.valueOf(0.0);
 
-    @JoinColumn
-    @ManyToOne(cascade = {CascadeType.PERSIST})
+    @ManyToOne(fetch = FetchType.LAZY)
     ProductEntity product;
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof IngredientEntity)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof IngredientEntity)) {
+            return false;
+        }
         IngredientEntity that = (IngredientEntity) o;
-        return Objects.equals(getId(), that.getId());
+        return Objects.equals(getIngredientId(), that.getIngredientId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId());
+        return Objects.hash(getIngredientId());
+    }
+
+    @Override
+    public String toString() {
+        return "{\"IngredientEntity\":{"
+                + "                        \"ingredientId\":" + ingredientId
+                + ",                         \"title\":\"" + title + "\""
+                + ",                         \"price\":\"" + price + "\""
+                + ",                         \"product\":" + product.getProductId()
+                + "}}";
     }
 }

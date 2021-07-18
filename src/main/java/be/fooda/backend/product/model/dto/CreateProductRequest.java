@@ -6,6 +6,7 @@ import lombok.extern.jackson.Jacksonized;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Jacksonized
 @Getter
@@ -16,7 +17,7 @@ import java.util.Objects;
 public class CreateProductRequest {
 
     // UNIQUE: name + eStoreId
-
+    
     String name;
     String eTrackingId;
     String description;
@@ -24,12 +25,66 @@ public class CreateProductRequest {
     Boolean isFeatured;
     CreateStoreRequest store;
     CreateTypeRequest type;
-    List<CreatePriceRequest> prices;
-    List<CreateTaxRequest> taxes;
+
+    Set<CreatePriceRequest> prices = new LinkedHashSet<>();
+
+    public void addPrice(CreatePriceRequest price) {
+        this.prices.add(price);
+    }
+
+    public void removePrice(CreatePriceRequest price) {
+        this.prices.remove(price);
+    }
+
+    List<CreateTaxRequest> taxes = new LinkedHashSet<>();
+
+    public void addTax(CreateTaxRequest tax) {
+        tax.setProduct(this);
+        this.taxes.add(tax);
+    }
+
+    public void removeTax(CreateTaxRequest tax) {
+        tax.setProduct(this);
+        this.taxes.remove(tax);
+    }
+
     CreateMediaRequest defaultImage;
-    List<CreateCategoryRequest> categories;
-    List<CreateTagRequest> tags;
-    List<CreateIngredientRequest> ingredients;
+
+    public void setDefaultImage(CreateMediaRequest defaultImage) {
+        this.defaultImage = defaultImage;
+    }
+
+    List<CreateCategoryRequest> categories = new LinkedHashSet<>();
+
+    public void addCategory(CreateCategoryRequest category) {
+        this.categories.add(category);
+    }
+
+    public void removeCategory(CreateCategoryRequest category) {
+        this.categories.remove(category);
+    }
+
+    List<CreateTagRequest> tags = new LinkedHashSet<>();
+
+    public void addTag(CreateTagRequest tag) {
+        tag.setProduct(this);
+        this.tags.add(tag);
+    }
+
+    public void removeTag(CreateTagRequest tag) {
+        tag.setProduct(this);
+        this.tags.remove(tag);
+    }
+
+    List<CreateIngredientRequest> ingredients = new LinkedHashSet<>();
+
+    public void addIngredient(CreateIngredientRequest ingredient) {
+        this.ingredients.add(ingredient);
+    }
+
+    public void removeIngredient(CreateIngredientRequest ingredient) {
+        this.ingredients.add(ingredient);
+    }
 
     @Override
     public boolean equals(Object o) {

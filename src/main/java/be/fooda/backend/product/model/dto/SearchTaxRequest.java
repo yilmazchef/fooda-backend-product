@@ -14,10 +14,6 @@ import java.util.UUID;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class SearchTaxRequest {
 
-    UUID id;
     String title;
     Double percentage;
-    Boolean isDefault;
-    SearchProductRequest product;
-
 }

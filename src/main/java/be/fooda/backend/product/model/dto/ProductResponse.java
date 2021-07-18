@@ -7,6 +7,7 @@ import lombok.extern.jackson.Jacksonized;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -18,7 +19,7 @@ import java.util.stream.Collectors;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ProductResponse {
 
-    UUID id;
+    UUID productId;
     Boolean isActive;
     String name;
     String eTrackingId;
@@ -27,19 +28,18 @@ public class ProductResponse {
     Boolean isFeatured;
     StoreResponse store;
     TypeResponse type;
-    List<PriceResponse> prices = new ArrayList<>();
 
+    Set<PriceResponse> prices = new LinkedHashSet<>();
+    
     public void addPrice(PriceResponse price) {
-        if (!this.prices.contains(price)) {
-            this.prices.add(price);
-        }
+        this.prices.add(price);
     }
 
     public void removePrice(PriceResponse price) {
         this.prices.remove(price);
     }
 
-    List<TaxResponse> taxes = new ArrayList<>();
+    Set<TaxResponse> taxes = new LinkedHashSet<>();
 
     public void addTax(TaxResponse tax) {
         this.taxes.add(tax);
@@ -51,7 +51,7 @@ public class ProductResponse {
 
     MediaResponse defaultImage;
 
-    List<CategoryResponse> categories = new ArrayList<>();
+    Set<CategoryResponse> categories = new LinkedHashSet<>();
 
     public void addCategory(CategoryResponse category) {
         this.categories.add(category);
@@ -61,7 +61,7 @@ public class ProductResponse {
         this.categories.remove(category);
     }
 
-    List<TagResponse> tags = new ArrayList<>();
+    Set<TagResponse> tags = new LinkedHashSet<>();
 
     public void addTag(TagResponse tag) {
         this.tags.add(tag);
@@ -71,7 +71,7 @@ public class ProductResponse {
         this.tags.remove(tag);
     }
 
-    List<IngredientResponse> ingredients = new ArrayList<>();
+    Set<IngredientResponse> ingredients = new LinkedHashSet<>();
 
     public void addIngredient(IngredientResponse ingredient) {
         this.ingredients.add(ingredient);

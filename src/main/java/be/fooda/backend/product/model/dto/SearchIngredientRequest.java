@@ -15,8 +15,7 @@ import java.util.UUID;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class SearchIngredientRequest {
 
-    UUID id;
-    String ingredientName;
+    String title;
     BigDecimal price;
 
 }

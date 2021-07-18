@@ -9,10 +9,8 @@ import java.util.Objects;
 import java.util.UUID;
 
 // LOMBOK
-@Table(name = "CategoryEntity")
 @Getter
 @Setter
-@ToString(onlyExplicitlyIncluded = true)
 @NoArgsConstructor(force = true, access = AccessLevel.PUBLIC)
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -22,10 +20,9 @@ import java.util.UUID;
 
 public class CategoryEntity {
 
-    @Column(nullable = false, updatable = false)
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    UUID id;
+    UUID categoryId;
 
     @FullTextField
     String title;
@@ -33,20 +30,32 @@ public class CategoryEntity {
     @Lob
     Byte[] icon;
 
-    @JoinColumn
-    @ManyToOne(cascade = {CascadeType.PERSIST})
+    @ManyToOne(fetch = FetchType.LAZY)
     ProductEntity product;
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof CategoryEntity)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof CategoryEntity)) {
+            return false;
+        }
         CategoryEntity that = (CategoryEntity) o;
-        return Objects.equals(getId(), that.getId());
+        return Objects.equals(getCategoryId(), that.getCategoryId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId());
+        return Objects.hash(getCategoryId());
+    }
+
+    @Override
+    public String toString() {
+        return "{\"CategoryEntity\":{"
+                + "                        \"categoryId\":" + categoryId
+                + ",                         \"title\":\"" + title + "\""
+                + ",                         \"product\":" + product.getProductId()
+                + "}}";
     }
 }

@@ -14,7 +14,7 @@ import java.util.UUID;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CategoryResponse {
 
-    UUID id;
+    UUID categoryId;
     String title;
     Byte[] icon;
 }

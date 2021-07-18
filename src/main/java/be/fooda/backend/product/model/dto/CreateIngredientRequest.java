@@ -14,6 +14,6 @@ import java.math.BigDecimal;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CreateIngredientRequest {
 
-    String ingredientName;
+    String title;
     BigDecimal price;
 }

@@ -14,7 +14,6 @@ import java.util.UUID;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class SearchMediaRequest {
 
-    UUID eImageId;
     String url;
     Boolean isDefault;
 

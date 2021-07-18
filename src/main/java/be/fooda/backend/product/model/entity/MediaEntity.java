@@ -11,10 +11,8 @@ import java.util.Objects;
 import java.util.UUID;
 
 // LOMBOK
-@Table(name = "MediaEntity")
 @Getter
 @Setter
-@ToString(onlyExplicitlyIncluded = true)
 @NoArgsConstructor(force = true, access = AccessLevel.PUBLIC)
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -24,35 +22,43 @@ import java.util.UUID;
 
 public class MediaEntity {
 
-    @Column(nullable = false, updatable = false)
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    UUID id;
-
-
-    @NotNull
-    UUID eImageId;
+    @Column(nullable = false, unique = true)
+    UUID mediaId;
 
     @FullTextField
     @URL
     String url;
 
-    Boolean isDefault;
+    Boolean isDefault = Boolean.FALSE;
 
-    @JoinColumn
-    @OneToOne(cascade = {CascadeType.ALL})
+    @OneToOne
     ProductEntity product;
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof MediaEntity)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof MediaEntity)) {
+            return false;
+        }
         MediaEntity that = (MediaEntity) o;
-        return Objects.equals(getId(), that.getId());
+        return Objects.equals(getMediaId(), that.getMediaId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId());
+        return Objects.hash(getMediaId());
+    }
+
+    @Override
+    public String toString() {
+        return "{\"MediaEntity\":{"
+                + "                        \"mediaId\":" + mediaId
+                + ",                         \"url\":\"" + url + "\""
+                + ",                         \"isDefault\":\"" + isDefault + "\""
+                + ",                         \"product\":" + product.getProductId()
+                + "}}";
     }
 }
