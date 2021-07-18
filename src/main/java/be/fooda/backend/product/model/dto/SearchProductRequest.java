@@ -5,11 +5,7 @@ import lombok.experimental.FieldDefaults;
 import lombok.extern.jackson.Jacksonized;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
-import java.util.stream.Collectors;
+import java.util.*;
 
 @Jacksonized
 @Getter
@@ -28,7 +24,7 @@ public class SearchProductRequest {
     SearchStoreRequest store;
     SearchTypeRequest type;
 
-    Set<SearchPriceRequest> prices = new LinkedHashSet<>();
+    Collection<SearchPriceRequest> prices;
 
     public void addPrice(SearchPriceRequest price) {
         this.prices.add(price);
@@ -38,15 +34,13 @@ public class SearchProductRequest {
         this.prices.remove(price);
     }
 
-    List<SearchTaxRequest> taxes = new LinkedHashSet<>();
+    Collection<SearchTaxRequest> taxes;
 
     public void addTax(SearchTaxRequest tax) {
-        tax.setProduct(this);
         this.taxes.add(tax);
     }
 
     public void removeTax(SearchTaxRequest tax) {
-        tax.setProduct(this);
         this.taxes.remove(tax);
     }
 
@@ -56,7 +50,7 @@ public class SearchProductRequest {
         this.defaultImage = defaultImage;
     }
 
-    List<SearchCategoryRequest> categories = new LinkedHashSet<>();
+    Collection<SearchCategoryRequest> categories;
 
     public void addCategory(SearchCategoryRequest category) {
         this.categories.add(category);
@@ -66,19 +60,17 @@ public class SearchProductRequest {
         this.categories.remove(category);
     }
 
-    List<SearchTagRequest> tags = new LinkedHashSet<>();
+    Collection<SearchTagRequest> tags;
 
     public void addTag(SearchTagRequest tag) {
-        tag.setProduct(this);
         this.tags.add(tag);
     }
 
     public void removeTag(SearchTagRequest tag) {
-        tag.setProduct(this);
         this.tags.remove(tag);
     }
 
-    List<SearchIngredientRequest> ingredients = new LinkedHashSet<>();
+    Collection<SearchIngredientRequest> ingredients;
 
     public void addIngredient(SearchIngredientRequest ingredient) {
         this.ingredients.add(ingredient);

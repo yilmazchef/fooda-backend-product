@@ -5,7 +5,8 @@ import lombok.experimental.FieldDefaults;
 import lombok.extern.jackson.Jacksonized;
 
 import java.math.BigDecimal;
-import java.util.UUID;
+
+import java.util.*;
 
 @Jacksonized
 @Getter

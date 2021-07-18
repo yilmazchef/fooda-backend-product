@@ -4,9 +4,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.jackson.Jacksonized;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Jacksonized
 @Getter
@@ -26,7 +24,7 @@ public class CreateProductRequest {
     CreateStoreRequest store;
     CreateTypeRequest type;
 
-    Set<CreatePriceRequest> prices = new LinkedHashSet<>();
+    Collection<CreatePriceRequest> prices = new ArrayList<>();
 
     public void addPrice(CreatePriceRequest price) {
         this.prices.add(price);
@@ -36,15 +34,13 @@ public class CreateProductRequest {
         this.prices.remove(price);
     }
 
-    List<CreateTaxRequest> taxes = new LinkedHashSet<>();
+    Collection<CreateTaxRequest> taxes = new ArrayList<>();
 
     public void addTax(CreateTaxRequest tax) {
-        tax.setProduct(this);
         this.taxes.add(tax);
     }
 
     public void removeTax(CreateTaxRequest tax) {
-        tax.setProduct(this);
         this.taxes.remove(tax);
     }
 
@@ -54,7 +50,7 @@ public class CreateProductRequest {
         this.defaultImage = defaultImage;
     }
 
-    List<CreateCategoryRequest> categories = new LinkedHashSet<>();
+    Collection<CreateCategoryRequest> categories = new ArrayList<>();
 
     public void addCategory(CreateCategoryRequest category) {
         this.categories.add(category);
@@ -64,19 +60,17 @@ public class CreateProductRequest {
         this.categories.remove(category);
     }
 
-    List<CreateTagRequest> tags = new LinkedHashSet<>();
+    Collection<CreateTagRequest> tags = new ArrayList<>();
 
     public void addTag(CreateTagRequest tag) {
-        tag.setProduct(this);
         this.tags.add(tag);
     }
 
     public void removeTag(CreateTagRequest tag) {
-        tag.setProduct(this);
         this.tags.remove(tag);
     }
 
-    List<CreateIngredientRequest> ingredients = new LinkedHashSet<>();
+    Collection<CreateIngredientRequest> ingredients = new ArrayList<>();
 
     public void addIngredient(CreateIngredientRequest ingredient) {
         this.ingredients.add(ingredient);

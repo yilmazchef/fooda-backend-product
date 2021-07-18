@@ -32,6 +32,7 @@ public class MediaEntity {
 
     Boolean isDefault = Boolean.FALSE;
 
+    @JoinColumn(name = "productId")
     @OneToOne
     ProductEntity product;
 

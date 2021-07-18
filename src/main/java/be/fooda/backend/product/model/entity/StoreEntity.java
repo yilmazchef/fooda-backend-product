@@ -30,6 +30,7 @@ public class StoreEntity {
     @Length(min = 2)
     String name;
 
+    @JoinColumn(name = "productId")
     @OneToOne
     ProductEntity product;
 

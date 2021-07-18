@@ -64,9 +64,9 @@ public class ProductEntity {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    Set<PriceEntity> prices = new LinkedHashSet<>();
+    Collection<PriceEntity> prices = new ArrayList<>();
 
-    public void setPrices(Set<PriceEntity> prices) {
+    public void setPrices(Collection<PriceEntity> prices) {
         this.prices = prices
                 .stream()
                 .map(this::setOnePrice)
@@ -94,7 +94,7 @@ public class ProductEntity {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    Set<TaxEntity> taxes = new LinkedHashSet<>();
+    Collection<TaxEntity> taxes = new ArrayList<>();
 
     public void addTax(TaxEntity tax) {
         tax.setProduct(this);
@@ -106,7 +106,7 @@ public class ProductEntity {
         this.taxes.remove(tax);
     }
 
-    public void setTaxes(Set<TaxEntity> taxes) {
+    public void setTaxes(Collection<TaxEntity> taxes) {
         this.taxes = taxes.stream()
                 .map(this::setOneTax)
                 .collect(Collectors.toSet());
@@ -117,7 +117,7 @@ public class ProductEntity {
         return tax;
     }
 
-    @OneToOne(mappedBy = "product")
+    @OneToOne(mappedBy = "product", cascade = { CascadeType.ALL} )
     @IndexedEmbedded
     MediaEntity defaultImage;
 
@@ -132,7 +132,7 @@ public class ProductEntity {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    Set<CategoryEntity> categories = new LinkedHashSet<>();
+    Collection<CategoryEntity> categories = new ArrayList<>();
 
     public void addCategory(CategoryEntity category) {
         category.setProduct(this);
@@ -144,7 +144,7 @@ public class ProductEntity {
         this.categories.remove(category);
     }
 
-    public void setCategories(Set<CategoryEntity> categories) {
+    public void setCategories(Collection<CategoryEntity> categories) {
         this.categories = categories
                 .stream()
                 .map(this::setOneCategory)
@@ -162,7 +162,7 @@ public class ProductEntity {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    Set<TagEntity> tags = new LinkedHashSet<>();
+    Collection<TagEntity> tags = new ArrayList<>();
 
     public void addTag(TagEntity tag) {
         tag.setProduct(this);
@@ -174,7 +174,7 @@ public class ProductEntity {
         this.tags.remove(tag);
     }
 
-    public void setTags(Set<TagEntity> tags) {
+    public void setTags(Collection<TagEntity> tags) {
         this.tags = tags
                 .stream()
                 .map(this::setOneTag)
@@ -193,7 +193,7 @@ public class ProductEntity {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    Set<IngredientEntity> ingredients = new LinkedHashSet<>();
+    Collection<IngredientEntity> ingredients = new ArrayList<>();
 
     public void addIngredient(IngredientEntity ingredient) {
         ingredient.setProduct(this);
@@ -205,7 +205,7 @@ public class ProductEntity {
         this.ingredients.add(ingredient);
     }
 
-    public void setIngredients(Set<IngredientEntity> ingredients) {
+    public void setIngredients(Collection<IngredientEntity> ingredients) {
         this.ingredients = ingredients.stream()
                 .map(this::setOneIngredient)
                 .collect(Collectors.toSet());
