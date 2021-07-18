@@ -24,6 +24,7 @@ public class StoreEntity {
 
     @Id
     @KeywordField
+    @Column(updatable = true)
     UUID storeId;
 
     @FullTextField

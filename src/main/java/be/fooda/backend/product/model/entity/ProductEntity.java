@@ -46,7 +46,7 @@ public class ProductEntity {
     Boolean isFeatured = Boolean.FALSE;
 
     @IndexedEmbedded
-    @OneToOne(mappedBy = "product")
+    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
     StoreEntity store;
 
     public void setStore(StoreEntity store) {
@@ -59,18 +59,11 @@ public class ProductEntity {
     TypeEntity type;
 
     @IndexedEmbedded
-    @OneToMany(
-            mappedBy = "product",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     Collection<PriceEntity> prices = new ArrayList<>();
 
     public void setPrices(Collection<PriceEntity> prices) {
-        this.prices = prices
-                .stream()
-                .map(this::setOnePrice)
-                .collect(Collectors.toSet());
+        this.prices = prices.stream().map(this::setOnePrice).collect(Collectors.toSet());
     }
 
     public void addPrice(PriceEntity price) {
@@ -89,11 +82,7 @@ public class ProductEntity {
     }
 
     @IndexedEmbedded
-    @OneToMany(
-            mappedBy = "product",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     Collection<TaxEntity> taxes = new ArrayList<>();
 
     public void addTax(TaxEntity tax) {
@@ -107,9 +96,7 @@ public class ProductEntity {
     }
 
     public void setTaxes(Collection<TaxEntity> taxes) {
-        this.taxes = taxes.stream()
-                .map(this::setOneTax)
-                .collect(Collectors.toSet());
+        this.taxes = taxes.stream().map(this::setOneTax).collect(Collectors.toSet());
     }
 
     TaxEntity setOneTax(TaxEntity tax) {
@@ -117,7 +104,7 @@ public class ProductEntity {
         return tax;
     }
 
-    @OneToOne(mappedBy = "product", cascade = { CascadeType.ALL} )
+    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
     @IndexedEmbedded
     MediaEntity defaultImage;
 
@@ -127,11 +114,7 @@ public class ProductEntity {
     }
 
     @IndexedEmbedded
-    @OneToMany(
-            mappedBy = "product",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     Collection<CategoryEntity> categories = new ArrayList<>();
 
     public void addCategory(CategoryEntity category) {
@@ -145,10 +128,7 @@ public class ProductEntity {
     }
 
     public void setCategories(Collection<CategoryEntity> categories) {
-        this.categories = categories
-                .stream()
-                .map(this::setOneCategory)
-                .collect(Collectors.toSet());
+        this.categories = categories.stream().map(this::setOneCategory).collect(Collectors.toSet());
     }
 
     CategoryEntity setOneCategory(CategoryEntity category) {
@@ -157,11 +137,7 @@ public class ProductEntity {
     }
 
     @IndexedEmbedded
-    @OneToMany(
-            mappedBy = "product",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     Collection<TagEntity> tags = new ArrayList<>();
 
     public void addTag(TagEntity tag) {
@@ -175,10 +151,7 @@ public class ProductEntity {
     }
 
     public void setTags(Collection<TagEntity> tags) {
-        this.tags = tags
-                .stream()
-                .map(this::setOneTag)
-                .collect(Collectors.toSet());
+        this.tags = tags.stream().map(this::setOneTag).collect(Collectors.toSet());
 
     }
 
@@ -188,11 +161,7 @@ public class ProductEntity {
     }
 
     @IndexedEmbedded
-    @OneToMany(
-            mappedBy = "product",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     Collection<IngredientEntity> ingredients = new ArrayList<>();
 
     public void addIngredient(IngredientEntity ingredient) {
@@ -206,9 +175,7 @@ public class ProductEntity {
     }
 
     public void setIngredients(Collection<IngredientEntity> ingredients) {
-        this.ingredients = ingredients.stream()
-                .map(this::setOneIngredient)
-                .collect(Collectors.toSet());
+        this.ingredients = ingredients.stream().map(this::setOneIngredient).collect(Collectors.toSet());
     }
 
     IngredientEntity setOneIngredient(IngredientEntity ingredient) {
@@ -235,23 +202,16 @@ public class ProductEntity {
 
     @Override
     public String toString() {
-        return "{\"ProductEntity\":{"
-                + "                        \"productId\":" + productId
+        return "{\"ProductEntity\":{" + "                        \"productId\":" + productId
                 + ",                         \"isActive\":\"" + isActive + "\""
-                + ",                         \"name\":\"" + name + "\""
-                + ",                         \"eTrackingId\":\"" + eTrackingId + "\""
-                + ",                         \"description\":\"" + description + "\""
+                + ",                         \"name\":\"" + name + "\"" + ",                         \"eTrackingId\":\""
+                + eTrackingId + "\"" + ",                         \"description\":\"" + description + "\""
                 + ",                         \"limitPerOrder\":\"" + limitPerOrder + "\""
                 + ",                         \"isFeatured\":\"" + isFeatured + "\""
-                + ",                         \"store\":" + store
-                + ",                         \"type\":\"" + type + "\""
-                + ",                         \"prices\":" + prices
-                + ",                         \"taxes\":" + taxes
+                + ",                         \"store\":" + store + ",                         \"type\":\"" + type + "\""
+                + ",                         \"prices\":" + prices + ",                         \"taxes\":" + taxes
                 + ",                         \"defaultImage\":" + defaultImage
-                + ",                         \"categories\":" + categories
-                + ",                         \"tags\":" + tags
-                + ",                         \"ingredients\":" + ingredients
-                + "}}";
+                + ",                         \"categories\":" + categories + ",                         \"tags\":"
+                + tags + ",                         \"ingredients\":" + ingredients + "}}";
     }
 }
-
