@@ -2,27 +2,33 @@ package be.fooda.backend.product.model.entity;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.hibernate.search.mapper.pojo.mapping.definition.annotation.*;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.KeywordField;
 import org.hibernate.validator.constraints.Length;
-import org.springframework.data.jpa.domain.AbstractAuditable;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.util.Objects;
 import java.util.UUID;
 
 // LOMBOK
+@Table(name = "StoreEntity")
 @Getter
 @Setter
-@ToString
+@ToString(onlyExplicitlyIncluded = true)
 @NoArgsConstructor(force = true, access = AccessLevel.PUBLIC)
+@AllArgsConstructor(access = AccessLevel.PUBLIC)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 
 // JPA
 @Entity
-@EntityListeners(AuditingEntityListener.class)
 
-public class StoreEntity extends Auditable<String> {
+public class StoreEntity {
+
+    @Column(nullable = false, updatable = false)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    UUID id;
+
 
     @FullTextField
     @Length(min = 2)
@@ -31,8 +37,8 @@ public class StoreEntity extends Auditable<String> {
     @KeywordField
     UUID storeId;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @ToString.Exclude
+    @JoinColumn
+    @OneToOne(cascade = {CascadeType.ALL})
     ProductEntity product;
 
     @Override

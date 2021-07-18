@@ -5,8 +5,6 @@ import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.GenericField;
-import org.springframework.data.jpa.domain.AbstractAuditable;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.constraints.FutureOrPresent;
@@ -18,17 +16,24 @@ import java.util.Objects;
 import java.util.UUID;
 
 // LOMBOK
+@Table(name = "PriceEntity")
 @Getter
 @Setter
 @ToString(onlyExplicitlyIncluded = true)
 @NoArgsConstructor(force = true, access = AccessLevel.PUBLIC)
+@AllArgsConstructor(access = AccessLevel.PUBLIC)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 
 // JPA
 @Entity
-@EntityListeners(AuditingEntityListener.class)
 
-public class PriceEntity extends Auditable<String> {
+public class PriceEntity {
+
+    @Column(nullable = false, updatable = false)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    UUID id;
+
 
     @FullTextField
     String title;

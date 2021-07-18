@@ -2,32 +2,37 @@ package be.fooda.backend.product.model.entity;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.hibernate.search.mapper.pojo.mapping.definition.annotation.*;
-import org.springframework.data.jpa.domain.AbstractAuditable;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
 
 import javax.persistence.*;
 import java.util.Objects;
 import java.util.UUID;
 
 // LOMBOK
+@Table(name = "TagEntity")
 @Getter
 @Setter
-@ToString
+@ToString(onlyExplicitlyIncluded = true)
 @NoArgsConstructor(force = true, access = AccessLevel.PUBLIC)
+@AllArgsConstructor(access = AccessLevel.PUBLIC)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 
 // JPA
 @Entity
-@EntityListeners(AuditingEntityListener.class)
 
-public class TagEntity extends Auditable<String> {
+public class TagEntity {
+
+    @Column(nullable = false, updatable = false)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    UUID id;
+
 
     @FullTextField
     String value;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @ToString.Exclude
+    @JoinColumn
+    @ManyToOne(cascade = {CascadeType.PERSIST})
     ProductEntity product;
 
     @Override

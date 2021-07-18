@@ -2,28 +2,35 @@ package be.fooda.backend.product.model.entity;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.hibernate.search.mapper.pojo.mapping.definition.annotation.*;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.GenericField;
 import org.hibernate.validator.constraints.Range;
-import org.springframework.data.jpa.domain.AbstractAuditable;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.util.Objects;
 import java.util.UUID;
 
 // LOMBOK
+@Table(name = "TaxEntity")
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor(force = true, access = AccessLevel.PUBLIC)
+@AllArgsConstructor(access = AccessLevel.PUBLIC)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 
 // JPA
 @Entity
-@EntityListeners(AuditingEntityListener.class)
 
-public class TaxEntity extends Auditable<String> {
+public class TaxEntity {
 
+    @Column(nullable = false, updatable = false)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    UUID id;
+
+
+    @Column(nullable = false, unique = true)
     @FullTextField
     String title;
 
