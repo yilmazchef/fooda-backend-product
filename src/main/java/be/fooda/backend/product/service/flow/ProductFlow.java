@@ -27,17 +27,14 @@ public class ProductFlow {
     private final ProductMapper productMapper;
 
     /*
-        Responsibilities of this class:
-        1- All scenarios (requirements) will be implemented here..
-        2- Exceptions will be handled here.
-        3- Mappers will be used here.
-        4- Validations for class fields will be checked here.
-        5- Database transactions will be processed here.
+     * Responsibilities of this class: 1- All scenarios (requirements) will be
+     * implemented here.. 2- Exceptions will be handled here. 3- Mappers will be
+     * used here. 4- Validations for class fields will be checked here. 5- Database
+     * transactions will be processed here.
      */
 
     // CREATE_PRODUCT(REQUEST)
-    public void createProduct(CreateProductRequest request) throws
-            NullPointerException, ResourceNotFoundException {
+    public void createProduct(CreateProductRequest request) throws NullPointerException, ResourceNotFoundException {
 
         // IF(NULL)
         if (Objects.isNull(request)) {
@@ -45,10 +42,9 @@ public class ProductFlow {
             throw new NullPointerException(HttpFailureMassages.FAILED_TO_CREATE_PRODUCT.getDescription());
         }
 
-        //  IF(PRODUCT_EXISTS)
-        boolean exists = productRepository.existsByNameAndStore_StoreId(
-                request.getName(), request.getStore().getStoreId()
-        );
+        // IF(PRODUCT_EXISTS)
+        boolean exists = productRepository.existsByTitleAndStore_StoreId(request.getTitle(),
+                request.getStore().getStoreId());
 
         if (exists) {
             // THROW_EXCEPTION
@@ -64,7 +60,8 @@ public class ProductFlow {
     }
 
     // UPDATE_PRODUCT(UNIQUE_IDENTIFIER, REQUEST)
-    public void updateProduct(UUID id, UpdateProductRequest request) {
+    public void updateProduct(UUID id, UpdateProductRequest request)
+            throws NullPointerException, ResourceNotFoundException {
 
         // IF(NULL)
         if (Objects.isNull(request)) {
@@ -74,7 +71,7 @@ public class ProductFlow {
 
         Optional<ProductEntity> oEntity = productRepository.findById(id);
 
-        //  IF(PRODUCT_NOT_EXIST)
+        // IF(PRODUCT_NOT_EXIST)
         if (oEntity.isEmpty()) {
             // THROW_EXCEPTION
             throw new ResourceNotFoundException(HttpFailureMassages.PRODUCT_NOT_FOUND.getDescription());
@@ -90,20 +87,56 @@ public class ProductFlow {
     }
 
     // FIND_ALL(PAGE_NO, PAGE_SIZE)
-    public List<ProductResponse> findAll(int pageNo, int pageSize) {
+    public List<ProductResponse> findAll(int pageNo, int pageSize)
+            throws NullPointerException, ResourceNotFoundException {
 
         // READ_FROM_DB(PAGE_NO, PAGE_SIZE)
         Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
         Page<ProductEntity> pages = productRepository.findAll(pageable);
 
-        // RETURN
+        // MAP & RETURN
         return productMapper.toResponses(pages.toList());
     }
 
     // FIND_BY_ID
+    public ProductResponse findById(UUID id) throws NullPointerException, ResourceNotFoundException {
 
+        if (Objects.isNull(id)) {
+            throw new NullPointerException(HttpFailureMassages.PRODUCT_ID_IS_REQUIRED.getDescription());
+        }
 
-    // FIND_BY_FIRST_NAME_AND_LAST_NAME
+        // READ_FROM_DB(ID)
+        Optional<ProductEntity> oEntity = productRepository.findById(id);
 
+        if (oEntity.isEmpty()) {
+            throw new ResourceNotFoundException(HttpFailureMassages.PRODUCT_NOT_FOUND.getDescription());
+        }
+
+        // MAP & RETURN
+        return productMapper.toResponse(oEntity.get());
+    }
+
+    // FIND_BY_TITLE
+    public List<ProductResponse> findByTitle(String title, int pageNo, int pageSize)
+            throws NullPointerException, ResourceNotFoundException {
+
+        if (Objects.isNull(title)) {
+            throw new NullPointerException(HttpFailureMassages.PRODUCT_TITLE_IS_REQUIRED.getDescription());
+        }
+
+        // READ_FROM_DB(ID)
+        List<ProductEntity> oEntities = productRepository.findAllByTitleContains(title);
+
+        if (oEntities.isEmpty()) {
+            throw new ResourceNotFoundException(HttpFailureMassages.PRODUCT_NOT_FOUND.getDescription());
+        }
+
+        // READ_FROM_DB(PAGE_NO, PAGE_SIZE)
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+        Page<ProductEntity> pages = productRepository.findAll(pageable);
+
+        // MAP & RETURN
+        return productMapper.toResponses(pages.toList());
+    }
 
 }

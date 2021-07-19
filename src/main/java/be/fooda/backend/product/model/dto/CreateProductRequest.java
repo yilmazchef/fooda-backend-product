@@ -14,9 +14,9 @@ import java.util.*;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CreateProductRequest {
 
-    // UNIQUE: name + eStoreId
+    // UNIQUE: title + eStoreId
     
-    String name;
+    String title;
     String eTrackingId;
     String description;
     Integer limitPerOrder;
@@ -85,12 +85,12 @@ public class CreateProductRequest {
         if (this == o) return true;
         if (!(o instanceof CreateProductRequest)) return false;
         CreateProductRequest that = (CreateProductRequest) o;
-        return Objects.equals(getName(), that.getName()) && Objects.equals(getStore(), that.getStore());
+        return Objects.equals(getTitle(), that.getTitle()) && Objects.equals(getStore(), that.getStore());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getName(), getStore());
+        return Objects.hash(getTitle(), getStore());
     }
 }
 

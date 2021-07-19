@@ -4,7 +4,7 @@ server:
 spring:
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     database-platform: org.hibernate.dialect.MySQL8Dialect
     properties:
       hibernate:
@@ -31,5 +31,6 @@ spring:
     name: fooda-backend-product
 
   jackson:
-    serialization.indent_output: true
-    default-property-inclusion: non_null
+    serialization: 
+      indent-output: true
+    default-property-inclusion: non-null

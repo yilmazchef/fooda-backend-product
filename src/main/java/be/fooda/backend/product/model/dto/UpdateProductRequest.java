@@ -14,7 +14,7 @@ import java.util.*;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class UpdateProductRequest {
 
-    String name;
+    String title;
     String eTrackingId;
     String description;
     Integer limitPerOrder;

@@ -31,7 +31,7 @@ public class ProductEntity {
     Boolean isActive = Boolean.TRUE;
 
     @FullTextField
-    String name;
+    String title;
 
     @KeywordField
     String eTrackingId;
@@ -63,7 +63,7 @@ public class ProductEntity {
     Collection<PriceEntity> prices = new ArrayList<>();
 
     public void setPrices(Collection<PriceEntity> prices) {
-        this.prices = prices.stream().map(this::setOnePrice).collect(Collectors.toSet());
+        this.prices = prices.stream().map(this::setOnePrice).collect(Collectors.toList());
     }
 
     public void addPrice(PriceEntity price) {
@@ -96,7 +96,7 @@ public class ProductEntity {
     }
 
     public void setTaxes(Collection<TaxEntity> taxes) {
-        this.taxes = taxes.stream().map(this::setOneTax).collect(Collectors.toSet());
+        this.taxes = taxes.stream().map(this::setOneTax).collect(Collectors.toList());
     }
 
     TaxEntity setOneTax(TaxEntity tax) {
@@ -128,7 +128,7 @@ public class ProductEntity {
     }
 
     public void setCategories(Collection<CategoryEntity> categories) {
-        this.categories = categories.stream().map(this::setOneCategory).collect(Collectors.toSet());
+        this.categories = categories.stream().map(this::setOneCategory).collect(Collectors.toList());
     }
 
     CategoryEntity setOneCategory(CategoryEntity category) {
@@ -151,7 +151,7 @@ public class ProductEntity {
     }
 
     public void setTags(Collection<TagEntity> tags) {
-        this.tags = tags.stream().map(this::setOneTag).collect(Collectors.toSet());
+        this.tags = tags.stream().map(this::setOneTag).collect(Collectors.toList());
 
     }
 
@@ -175,7 +175,7 @@ public class ProductEntity {
     }
 
     public void setIngredients(Collection<IngredientEntity> ingredients) {
-        this.ingredients = ingredients.stream().map(this::setOneIngredient).collect(Collectors.toSet());
+        this.ingredients = ingredients.stream().map(this::setOneIngredient).collect(Collectors.toList());
     }
 
     IngredientEntity setOneIngredient(IngredientEntity ingredient) {
@@ -204,7 +204,7 @@ public class ProductEntity {
     public String toString() {
         return "{\"ProductEntity\":{" + "                        \"productId\":" + productId
                 + ",                         \"isActive\":\"" + isActive + "\""
-                + ",                         \"name\":\"" + name + "\"" + ",                         \"eTrackingId\":\""
+                + ",                         \"title\":\"" + getTitle() + "\"" + ",                         \"eTrackingId\":\""
                 + eTrackingId + "\"" + ",                         \"description\":\"" + description + "\""
                 + ",                         \"limitPerOrder\":\"" + limitPerOrder + "\""
                 + ",                         \"isFeatured\":\"" + isFeatured + "\""

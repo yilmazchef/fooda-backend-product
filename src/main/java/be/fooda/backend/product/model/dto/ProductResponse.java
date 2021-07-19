@@ -4,7 +4,6 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.jackson.Jacksonized;
 
-import java.time.LocalDateTime;
 import java.util.*;
 
 @Jacksonized
@@ -17,7 +16,7 @@ public class ProductResponse {
 
     UUID productId;
     Boolean isActive;
-    String name;
+    String title;
     String eTrackingId;
     String description;
     Integer limitPerOrder;
@@ -25,7 +24,7 @@ public class ProductResponse {
     StoreResponse store;
     TypeResponse type;
 
-    Set<PriceResponse> prices = new LinkedHashSet<>();
+    Collection<PriceResponse> prices = new ArrayList<>();
     
     public void addPrice(PriceResponse price) {
         this.prices.add(price);
@@ -35,7 +34,7 @@ public class ProductResponse {
         this.prices.remove(price);
     }
 
-    Set<TaxResponse> taxes = new LinkedHashSet<>();
+    Collection<TaxResponse> taxes = new ArrayList<>();
 
     public void addTax(TaxResponse tax) {
         this.taxes.add(tax);
@@ -47,7 +46,7 @@ public class ProductResponse {
 
     MediaResponse defaultImage;
 
-    Set<CategoryResponse> categories = new LinkedHashSet<>();
+    Collection<CategoryResponse> categories = new ArrayList<>();
 
     public void addCategory(CategoryResponse category) {
         this.categories.add(category);
@@ -57,7 +56,7 @@ public class ProductResponse {
         this.categories.remove(category);
     }
 
-    Set<TagResponse> tags = new LinkedHashSet<>();
+    Collection<TagResponse> tags = new ArrayList<>();
 
     public void addTag(TagResponse tag) {
         this.tags.add(tag);
@@ -67,7 +66,7 @@ public class ProductResponse {
         this.tags.remove(tag);
     }
 
-    Set<IngredientResponse> ingredients = new LinkedHashSet<>();
+    Collection<IngredientResponse> ingredients = new ArrayList<>();
 
     public void addIngredient(IngredientResponse ingredient) {
         this.ingredients.add(ingredient);
