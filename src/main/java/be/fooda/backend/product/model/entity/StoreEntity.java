@@ -29,7 +29,8 @@ public class StoreEntity {
 
     @FullTextField
     @Length(min = 2)
-    String name;
+    @Column(nullable = false, unique = false)
+    String title;
 
     @JoinColumn(name = "productId")
     @OneToOne
@@ -56,7 +57,7 @@ public class StoreEntity {
     public String toString() {
         return "{\"StoreEntity\":{"
                 + "                        \"storeId\":" + storeId
-                + ",                         \"name\":\"" + name + "\""
+                + ",                         \"title\":\"" + title + "\""
                 + ",                         \"product\":" + product.getProductId()
                 + "}}";
     }

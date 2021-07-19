@@ -15,7 +15,7 @@ import java.util.*;
 public class CreateStoreRequest {
 
     UUID storeId;
-    String name;
+    String title;
 
     @Override
     public boolean equals(Object o) {

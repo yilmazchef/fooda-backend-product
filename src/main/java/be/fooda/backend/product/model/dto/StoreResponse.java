@@ -15,6 +15,6 @@ import java.util.*;
 public class StoreResponse {
 
     UUID storeId;
-    String name;
+    String title;
 
 }

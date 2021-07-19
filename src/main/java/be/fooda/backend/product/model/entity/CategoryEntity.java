@@ -25,6 +25,7 @@ public class CategoryEntity {
     UUID categoryId;
 
     @FullTextField
+    @Column(nullable = false, unique = false)
     String title;
 
     @Lob

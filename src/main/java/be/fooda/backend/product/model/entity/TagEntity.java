@@ -27,6 +27,7 @@ public class TagEntity {
     UUID tagId;
 
     @FullTextField
+    @Column(nullable = false, unique = false)
     String value;
 
     @ManyToOne(fetch = FetchType.LAZY)

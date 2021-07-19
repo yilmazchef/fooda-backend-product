@@ -28,6 +28,7 @@ public class MediaEntity {
 
     @FullTextField
     @URL
+    @Column(nullable = false, unique = true)
     String url;
 
     Boolean isDefault = Boolean.FALSE;

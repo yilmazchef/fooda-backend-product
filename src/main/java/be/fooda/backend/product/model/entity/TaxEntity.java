@@ -26,7 +26,7 @@ public class TaxEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     UUID taxId;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = false)
     @FullTextField
     String title;
 
