@@ -19,8 +19,9 @@ public class UpdateProductRequest {
     String description;
     Integer limitPerOrder;
     Boolean isFeatured;
-    UpdateStoreRequest store;
+    UUID storeId;
     UpdateTypeRequest type;
+    UUID defaultImageId;
     
     Collection<UpdatePriceRequest> prices = new ArrayList<>();
 
@@ -40,12 +41,6 @@ public class UpdateProductRequest {
 
     public void removeTax(UpdateTaxRequest tax) {
         this.taxes.remove(tax);
-    }
-
-    UpdateMediaRequest defaultImage;
-
-    public void setDefaultImage(UpdateMediaRequest defaultImage) {
-        this.defaultImage = defaultImage;
     }
 
     Collection<UpdateCategoryRequest> categories = new ArrayList<>();

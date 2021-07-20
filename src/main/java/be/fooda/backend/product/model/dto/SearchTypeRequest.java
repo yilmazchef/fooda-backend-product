@@ -10,9 +10,9 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 public enum SearchTypeRequest {
 
-    SIMPLE("A product which have no variations"),
-    GROUPED("A product which has variations"),
-    COMPLEX("multiple products in a product");
+    SIMPLE("Simple: A product which have no variations"),
+    GROUPED("Grouped: A product which has variations"),
+    COMPLEX("Complex: multiple products in a product");
 
     String value;
 

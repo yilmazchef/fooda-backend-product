@@ -21,10 +21,11 @@ public class SearchProductRequest {
     String description;
     Integer limitPerOrder;
     Boolean isFeatured;
-    SearchStoreRequest store;
+    UUID storeId;
     SearchTypeRequest type;
+    UUID defaultImageId;
 
-    Collection<SearchPriceRequest> prices;
+    Collection<SearchPriceRequest> prices = new ArrayList<>();
 
     public void addPrice(SearchPriceRequest price) {
         this.prices.add(price);
@@ -34,7 +35,7 @@ public class SearchProductRequest {
         this.prices.remove(price);
     }
 
-    Collection<SearchTaxRequest> taxes;
+    Collection<SearchTaxRequest> taxes = new ArrayList<>();
 
     public void addTax(SearchTaxRequest tax) {
         this.taxes.add(tax);
@@ -44,13 +45,7 @@ public class SearchProductRequest {
         this.taxes.remove(tax);
     }
 
-    SearchMediaRequest defaultImage;
-
-    public void setDefaultImage(SearchMediaRequest defaultImage) {
-        this.defaultImage = defaultImage;
-    }
-
-    Collection<SearchCategoryRequest> categories;
+    Collection<SearchCategoryRequest> categories = new ArrayList<>();
 
     public void addCategory(SearchCategoryRequest category) {
         this.categories.add(category);
@@ -60,7 +55,7 @@ public class SearchProductRequest {
         this.categories.remove(category);
     }
 
-    Collection<SearchTagRequest> tags;
+    Collection<SearchTagRequest> tags = new ArrayList<>();
 
     public void addTag(SearchTagRequest tag) {
         this.tags.add(tag);
@@ -70,7 +65,7 @@ public class SearchProductRequest {
         this.tags.remove(tag);
     }
 
-    Collection<SearchIngredientRequest> ingredients;
+    Collection<SearchIngredientRequest> ingredients = new ArrayList<>();
 
     public void addIngredient(SearchIngredientRequest ingredient) {
         this.ingredients.add(ingredient);

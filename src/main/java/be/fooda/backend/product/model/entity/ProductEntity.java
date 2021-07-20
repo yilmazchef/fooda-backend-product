@@ -5,6 +5,8 @@ import lombok.experimental.FieldDefaults;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -31,6 +33,7 @@ public class ProductEntity {
     Boolean isActive = Boolean.TRUE;
 
     @FullTextField
+    @NotNull
     String title;
 
     @KeywordField
@@ -45,18 +48,13 @@ public class ProductEntity {
 
     Boolean isFeatured = Boolean.FALSE;
 
-    @IndexedEmbedded
-    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
-    StoreEntity store;
-
-    public void setStore(StoreEntity store) {
-        store.setProduct(this);
-        this.store = store;
-    }
+    UUID storeId;
 
     @FullTextField
     @Enumerated(EnumType.STRING)
     TypeEntity type;
+
+    UUID defaultImageId;
 
     @IndexedEmbedded
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -104,15 +102,6 @@ public class ProductEntity {
         return tax;
     }
 
-    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
-    @IndexedEmbedded
-    MediaEntity defaultImage;
-
-    public void setDefaultImage(MediaEntity defaultImage) {
-        defaultImage.setProduct(this);
-        this.defaultImage = defaultImage;
-    }
-
     @IndexedEmbedded
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     Collection<CategoryEntity> categories = new ArrayList<>();
@@ -130,7 +119,7 @@ public class ProductEntity {
     public void setCategories(Collection<CategoryEntity> categories) {
         this.categories = categories.stream().map(this::setOneCategory).collect(Collectors.toList());
     }
-
+    
     CategoryEntity setOneCategory(CategoryEntity category) {
         category.setProduct(this);
         return category;
@@ -208,9 +197,9 @@ public class ProductEntity {
                 + eTrackingId + "\"" + ",                         \"description\":\"" + description + "\""
                 + ",                         \"limitPerOrder\":\"" + limitPerOrder + "\""
                 + ",                         \"isFeatured\":\"" + isFeatured + "\""
-                + ",                         \"store\":" + store + ",                         \"type\":\"" + type + "\""
+                + ",                         \"storeId\":" + storeId + ",                         \"type\":\"" + type.getValue() + "\""
                 + ",                         \"prices\":" + prices + ",                         \"taxes\":" + taxes
-                + ",                         \"defaultImage\":" + defaultImage
+                + ",                         \"defaultImageId\":" + defaultImageId
                 + ",                         \"categories\":" + categories + ",                         \"tags\":"
                 + tags + ",                         \"ingredients\":" + ingredients + "}}";
     }

@@ -21,8 +21,9 @@ public class CreateProductRequest {
     String description;
     Integer limitPerOrder;
     Boolean isFeatured;
-    CreateStoreRequest store;
+    UUID storeId;
     CreateTypeRequest type;
+    UUID defaultImageId;
 
     Collection<CreatePriceRequest> prices = new ArrayList<>();
 
@@ -42,12 +43,6 @@ public class CreateProductRequest {
 
     public void removeTax(CreateTaxRequest tax) {
         this.taxes.remove(tax);
-    }
-
-    CreateMediaRequest defaultImage;
-
-    public void setDefaultImage(CreateMediaRequest defaultImage) {
-        this.defaultImage = defaultImage;
     }
 
     Collection<CreateCategoryRequest> categories = new ArrayList<>();
@@ -85,12 +80,12 @@ public class CreateProductRequest {
         if (this == o) return true;
         if (!(o instanceof CreateProductRequest)) return false;
         CreateProductRequest that = (CreateProductRequest) o;
-        return Objects.equals(getTitle(), that.getTitle()) && Objects.equals(getStore(), that.getStore());
+        return Objects.equals(getTitle(), that.getTitle()) && Objects.equals(getStoreId(), that.getStoreId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getTitle(), getStore());
+        return Objects.hash(getTitle(), getStoreId());
     }
 }
 

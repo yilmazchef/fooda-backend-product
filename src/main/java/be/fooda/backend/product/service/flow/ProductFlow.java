@@ -44,7 +44,7 @@ public class ProductFlow {
 
         // IF(PRODUCT_EXISTS)
         boolean exists = productRepository.existsByTitleAndStore_StoreId(request.getTitle(),
-                request.getStore().getStoreId());
+                request.getStoreId());
 
         if (exists) {
             // THROW_EXCEPTION
